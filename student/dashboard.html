@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - CenterBuddy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] }, colors: { primary: '#6366f1', accent: '#f472b6' } } }
+    }
+  </script>
+  <style>
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+    .text-gradient { background: linear-gradient(to right, #6366f1, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white font-sans antialiased">
+  <nav class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2">
+        <svg class="w-8 h-8" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="url(#dashG)"/><path d="M20 10L28 26H12L20 10Z" fill="white"/><defs><linearGradient id="dashG" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#f472b6"/></linearGradient></defs></svg>
+        <span class="text-xl font-bold text-gradient">CenterBuddy</span>
+      </a>
+      <div class="flex items-center gap-4">
+        <span class="text-sm text-gray-400">Welcome, Rahul!</span>
+        <a href="login.html" class="text-sm text-gray-400 hover:text-white transition">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Exam Card -->
+    <div class="bg-gradient-to-br from-primary/20 to-accent/20 border border-white/10 rounded-2xl p-6 mb-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="text-sm text-gray-400">Your Exam</div>
+          <div class="text-2xl font-bold mt-1">NEET 2026</div>
+          <div class="flex items-center gap-4 mt-2 text-sm text-gray-400">
+            <span>📍 Delhi Center</span>
+            <span>📅 May 4, 2026</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-sm text-gray-400">Days Remaining</div>
+          <div class="text-4xl font-bold text-primary">47</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5 hover:scale-105 transition cursor-pointer">
+        <div class="text-2xl mb-2">🍔</div>
+        <div class="font-medium">Find Food</div>
+        <div class="text-xs text-gray-500 mt-1">12 verified spots nearby</div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5 hover:scale-105 transition cursor-pointer">
+        <div class="text-2xl mb-2">🏨</div>
+        <div class="font-medium">Find Stay</div>
+        <div class="text-xs text-gray-500 mt-1">4 hotels available</div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5 hover:scale-105 transition cursor-pointer">
+        <div class="text-2xl mb-2">🗺️</div>
+        <div class="font-medium">Navigate</div>
+        <div class="text-xs text-gray-500 mt-1">Get directions</div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-5 hover:scale-105 transition cursor-pointer">
+        <div class="text-2xl mb-2">⭐</div>
+        <div class="font-medium">Review Center</div>
+        <div class="text-xs text-gray-500 mt-1">Share experience</div>
+      </div>
+    </div>
+
+    <!-- Nearby Places -->
+    <h2 class="text-xl font-semibold mb-4">Nearby Places</h2>
+    <div class="space-y-3">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="text-2xl">🍛</div>
+          <div>
+            <div class="font-medium">Sharma Dhaba</div>
+            <div class="text-xs text-gray-500">North Indian • 0.3 km away</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 text-yellow-400 text-sm">★★★★★ <span class="text-gray-400">(4.8)</span></div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="text-2xl">🏨</div>
+          <div>
+            <div class="font-medium">Hotel Sunrise</div>
+            <div class="text-xs text-gray-500">Budget Stay • 0.5 km away</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 text-yellow-400 text-sm">★★★★☆ <span class="text-gray-400">(4.5)</span></div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="text-2xl">☕</div>
+          <div>
+            <div class="font-medium">Campus Cafe</div>
+            <div class="text-xs text-gray-500">Quick Bites • 0.2 km away</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 text-yellow-400 text-sm">★★★★★ <span class="text-gray-400">(4.9)</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

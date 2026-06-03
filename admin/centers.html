@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Centers - Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] }, colors: { primary: '#6366f1', accent: '#f472b6' } } }
+    }
+  </script>
+</head>
+<body class="bg-zinc-950 text-white font-sans antialiased">
+  <nav class="sticky top-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="text-xl font-bold text-primary">Admin</span>
+      </a>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="text-sm text-gray-400 hover:text-white">Dashboard</a>
+        <a href="centers.html" class="text-sm text-white">Centers</a>
+        <a href="settings.html" class="text-sm text-gray-400 hover:text-white">Settings</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold">Exam Centers</h1>
+      <button class="px-4 py-2 bg-primary rounded-lg text-sm font-medium hover:opacity-90">+ Add Center</button>
+    </div>
+
+    <!-- Search -->
+    <div class="mb-6">
+      <input type="text" placeholder="Search centers..." class="w-full md:w-96 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-primary transition placeholder-gray-600">
+    </div>
+
+    <!-- Centers Table -->
+    <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+      <table class="w-full">
+        <thead class="border-b border-white/10">
+          <tr class="text-left text-sm text-gray-400">
+            <th class="px-4 py-3">Center Name</th>
+            <th class="px-4 py-3">City</th>
+            <th class="px-4 py-3">Reviews</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5">
+            <td class="px-4 py-3 font-medium">Delhi Public School</td>
+            <td class="px-4 py-3 text-gray-400">Delhi</td>
+            <td class="px-4 py-3 text-yellow-400">4.8 (124)</td>
+            <td class="px-4 py-3"><span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Active</span></td>
+            <td class="px-4 py-3"><button class="text-primary hover:underline text-sm">Edit</button></td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="px-4 py-3 font-medium">Allen Kota Center</td>
+            <td class="px-4 py-3 text-gray-400">Kota</td>
+            <td class="px-4 py-3 text-yellow-400">4.9 (256)</td>
+            <td class="px-4 py-3"><span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Active</span></td>
+            <td class="px-4 py-3"><button class="text-primary hover:underline text-sm">Edit</button></td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="px-4 py-3 font-medium">Vibrant Academy</td>
+            <td class="px-4 py-3 text-gray-400">Jaipur</td>
+            <td class="px-4 py-3 text-yellow-400">4.7 (89)</td>
+            <td class="px-4 py-3"><span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded text-xs">Pending</span></td>
+            <td class="px-4 py-3"><button class="text-primary hover:underline text-sm">Edit</button></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">Aakash Institute</td>
+            <td class="px-4 py-3 text-gray-400">Noida</td>
+            <td class="px-4 py-3 text-yellow-400">4.6 (67)</td>
+            <td class="px-4 py-3"><span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Active</span></td>
+            <td class="px-4 py-3"><button class="text-primary hover:underline text-sm">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
