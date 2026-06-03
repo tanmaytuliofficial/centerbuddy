@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="scroll-smooth light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premium Pass & Mission - CenterBuddy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "background": "#f8f9fa", "primary": "#004655", "primary-container": "#005f73",
+        "on-primary": "#ffffff", "on-primary-container": "#91d7ee", "secondary": "#845400",
+        "secondary-container": "#ffa91e", "on-secondary": "#ffffff", "on-secondary-container": "#6a4300",
+        "surface-container-lowest": "#ffffff", "surface-container-high": "#e7e8e9",
+        "surface-container": "#edeeef", "surface-container-low": "#f3f4f5",
+        "on-surface": "#191c1d", "on-surface-variant": "#3f484c", "outline-variant": "#bfc8cc",
+        "tertiary": "#004749", "tertiary-container": "#006163", "on-tertiary": "#ffffff",
+        "on-tertiary-container": "#72dde0", "error": "#ba1a1a", "error-container": "#ffdad6",
+        "surface-dim": "#d9dadb", "surface-bright": "#f8f9fa",
+        "primary-fixed": "#b2ebff", "primary-fixed-dim": "#8bd1e8",
+        "secondary-fixed": "#ffddb6", "secondary-fixed-dim": "#ffb95a",
+        "inverse-surface": "#2e3132", "inverse-on-surface": "#f0f1f2", "inverse-primary": "#8bd1e8"
+      },
+      fontFamily: { "headline-lg": ["Public Sans"], "display": ["Public Sans"], "headline-md": ["Public Sans"],
+        "headline-sm": ["Public Sans"], "body-md": ["Inter"], "body-lg": ["Inter"],
+        "body-sm": ["Inter"], "label-md": ["Inter"], "label-sm": ["Inter"] }
+    }
+  }
+}
+</script>
+<style>
+body { font-family: 'Inter', sans-serif; }
+h1, h2, h3 { font-family: 'Public Sans', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.fill-icon { font-variation-settings: 'FILL' 1; }
+.glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 4px 20px rgba(0, 95, 115, 0.05); }
+.premium-glow { box-shadow: 0 0 40px rgba(132, 84, 0, 0.1); }
+</style>
+</head>
+<body class="bg-background text-on-surface">
+
+<!-- TopAppBar -->
+<header class="bg-surface/70 backdrop-blur-xl docked top-0 sticky z-50 border-b border-outline-variant/20 h-20">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-md">
+<a href="index.html"><span class="font-display text-headline-md font-bold text-primary">CenterBuddy</span></a>
+<nav class="hidden md:flex gap-lg ml-xl">
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md" href="index.html">Home</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md" href="#">Centers</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md" href="feed.html">Live Feed</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button id="themeToggle" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined sun-icon">dark_mode</span>
+<span class="material-symbols-outlined moon-icon hidden">light_mode</span>
+</button>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">account_circle</span>
+</div>
+</div>
+</header>
+
+<main>
+<!-- Hero Section: Mission -->
+<section class="pt-xl pb-lg bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+<div class="space-y-md">
+<div class="inline-flex items-center gap-xs px-sm py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full">
+<span class="material-symbols-outlined text-[18px] fill-icon">favorite</span>
+<span class="font-label-md text-label-md">Built for India</span>
+</div>
+<h1 class="font-display text-display text-on-surface tracking-tight">The 5:00 AM Struggle is Real.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg leading-relaxed">
+In India, an exam isn't just for the student; it's a marathon for the whole family. From sleeping on railway platforms to navigating chaotic crowds at dawn, we saw the exhaustion. We built CenterBuddy to ensure no student fails because of a commute.
+</p>
+<div class="flex flex-wrap gap-md pt-base">
+<div class="flex flex-col">
+<span class="font-display text-headline-lg text-primary">40M+</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Annual Aspirants</span>
+</div>
+<div class="w-px h-12 bg-outline-variant/30 hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="font-display text-headline-lg text-secondary">3.5Hrs</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Avg. Travel Stress</span>
+</div>
+<div class="w-px h-12 bg-outline-variant/30 hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="font-display text-headline-lg text-tertiary-container">98%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Anxiety Reduction</span>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 to-primary-container/30 flex items-center justify-center shadow-2xl relative z-10">
+<span class="material-symbols-outlined text-[120px] text-primary/40">school</span>
+</div>
+<div class="absolute -bottom-6 -left-6 w-48 h-48 bg-primary-fixed rounded-2xl -z-0 opacity-50 blur-3xl"></div>
+</div>
+</div>
+</section>
+
+<!-- Relief Infrastructure -->
+<section class="py-xl bg-surface">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-xl">
+<h2 class="font-display text-headline-lg text-on-surface mb-sm">Relief Infrastructure</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">We don't just provide data; we build the physical and digital bridges that connect students to their success.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="p-md bg-surface-container-low rounded-2xl border border-outline-variant/30 group hover:border-primary/50 transition-colors">
+<div class="w-12 h-12 bg-primary-container text-on-primary-container rounded-xl flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">map</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-sm text-on-surface">Verified Routes</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Crowdsourced and admin-verified maps specifically for exam-day traffic peaks.</p>
+</div>
+<div class="p-md bg-surface-container-low rounded-2xl border border-outline-variant/30 group hover:border-primary/50 transition-colors">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-xl flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">hotel</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-sm text-on-surface">Stay & Rest</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Partnerships with local centers to provide 4-hour 'Relief Slots' for students.</p>
+</div>
+<div class="p-md bg-surface-container-low rounded-2xl border border-outline-variant/30 group hover:border-primary/50 transition-colors">
+<div class="w-12 h-12 bg-tertiary-container text-on-tertiary-container rounded-xl flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-sm text-on-surface">Live Relief Feed</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time alerts from local volunteers about gate opening times.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Premium Pass Section -->
+<section class="py-xl bg-primary relative overflow-hidden">
+<div class="absolute top-0 right-0 w-1/3 h-full bg-primary-container opacity-20 -skew-x-12 translate-x-1/2"></div>
+<div class="max-w-container-max mx-auto px-gutter relative z-10">
+<div class="flex flex-col md:flex-row items-center justify-between gap-xl">
+<div class="md:w-1/2 space-y-md text-on-primary">
+<h2 class="font-display text-display tracking-tight leading-tight">Zero Anxiety. <br/><span class="text-primary-fixed">One Day.</span></h2>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim">Our Premium Pass is priced for everyone. For the price of a cup of tea, get operational precision for your exam day.</p>
+<ul class="space-y-sm">
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-fixed fill-icon">check_circle</span>
+<span class="font-body-md">Priority Alerts (15-min early warning)</span>
+</li>
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-fixed fill-icon">check_circle</span>
+<span class="font-body-md">Pre-booked Locker Reservations</span>
+</li>
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-fixed fill-icon">check_circle</span>
+<span class="font-body-md">Live Transport Direct-Line Support</span>
+</li>
+</ul>
+</div>
+<div class="md:w-1/3 w-full">
+<div class="glass-card premium-glow rounded-3xl p-md flex flex-col items-center text-center border-white/30">
+<span class="font-label-md text-label-md px-md py-1 bg-secondary-container text-on-secondary-container rounded-full mb-md">LIMITED OFFER</span>
+<h3 class="font-display text-headline-md text-on-surface mb-base">Exam Day Premium Pass</h3>
+<div class="flex items-baseline gap-xs mb-md">
+<span class="font-display text-display text-primary">₹29</span>
+<span class="font-label-md text-label-md text-on-surface-variant line-through">₹99</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">/ exam day</span>
+</div>
+<div class="w-full space-y-sm mb-lg">
+<div class="flex justify-between items-center p-sm bg-surface-container-high rounded-xl">
+<span class="font-label-md text-label-md text-on-surface">Locker Booking</span>
+<span class="font-label-md text-label-md text-primary font-bold">Included</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-high rounded-xl">
+<span class="font-label-md text-label-md text-on-surface">Verified Routes</span>
+<span class="font-label-md text-label-md text-primary font-bold">Priority Access</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-high rounded-xl">
+<span class="font-label-md text-label-md text-on-surface">Support Chat</span>
+<span class="font-label-md text-label-md text-primary font-bold">24/7 Live</span>
+</div>
+</div>
+<button class="w-full py-md bg-on-primary text-primary rounded-xl font-headline-sm shadow-lg hover:shadow-xl transition-all active:scale-[0.98]">
+Secure Your Pass
+</button>
+<p class="mt-md font-label-sm text-label-sm text-on-surface-variant">Refundable if exam center changes</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Stats Grid -->
+<section class="py-xl bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-md md:h-[600px]">
+<div class="md:col-span-2 md:row-span-2 bg-surface rounded-3xl p-lg border border-outline-variant/30 flex flex-col justify-end relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[120px] text-primary/20">school</span>
+</div>
+<div class="relative z-10">
+<h4 class="font-display text-headline-lg mb-sm text-on-surface">Every minute saved is a point earned.</h4>
+<p class="font-body-md opacity-80 text-on-surface">Research shows that peak stress during travel reduces cognitive performance by 22% in critical exams.</p>
+</div>
+</div>
+<div class="bg-primary-container text-on-primary-container rounded-3xl p-md flex flex-col justify-center items-center text-center">
+<span class="font-display text-display leading-none mb-xs">85%</span>
+<p class="font-label-md text-label-md opacity-90 uppercase tracking-widest">Late Arrivals Prevented</p>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed rounded-3xl p-md flex flex-col justify-center">
+<span class="material-symbols-outlined text-headline-lg mb-sm fill-icon">security</span>
+<h5 class="font-headline-sm text-headline-sm">Verified Secure</h5>
+<p class="font-body-sm text-body-sm opacity-80">Locker facilities at 500+ major centers nationwide.</p>
+</div>
+<div class="md:col-span-2 bg-tertiary-container text-on-tertiary-container rounded-3xl p-md flex items-center gap-md">
+<div class="w-20 h-20 bg-surface/20 rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-headline-lg">hub</span>
+</div>
+<div>
+<h5 class="font-headline-sm text-headline-sm">12,000+ Volunteers</h5>
+<p class="font-body-sm text-body-sm opacity-90">An army of local residents updating crowd status every 5 minutes.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-lg px-gutter max-w-container-max mx-auto flex flex-col items-center gap-md text-center border-t border-outline-variant/50 bg-surface-container-highest">
+<span class="font-display text-headline-sm font-bold text-primary">CenterBuddy</span>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-sm font-label-sm" href="#">City Centers</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-sm font-label-sm" href="#">Exam Categories</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-sm font-label-sm" href="#">Mission</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-sm font-label-sm" href="#">Support</a>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2026 CenterBuddy. Providing relief during India's most stressful days.</p>
+</footer>
+
+<!-- Bottom Nav -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 bg-surface/80 backdrop-blur-md border-t border-outline-variant/30 z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="index.html">
+<span class="material-symbols-outlined">home</span><span class="font-label-sm text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">map</span><span class="font-label-sm text-[10px]">Centers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="feed.html">
+<span class="material-symbols-outlined">live_tv</span><span class="font-label-sm text-[10px]">Live</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="stay.html">
+<span class="material-symbols-outlined">bed</span><span class="font-label-sm text-[10px]">Stay</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold" href="student/login.html">
+<span class="material-symbols-outlined fill-icon">person</span><span class="font-label-sm text-[10px]">Profile</span>
+</a>
+</nav>
+
+<script>
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+if (localStorage.getItem('theme') === 'dark') html.classList.add('dark');
+themeToggle.addEventListener('click', () => {
+  html.classList.toggle('dark');
+  document.querySelector('.sun-icon').classList.toggle('hidden');
+  document.querySelector('.moon-icon').classList.toggle('hidden');
+  localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+});
+</script>
+</body>
+</html>

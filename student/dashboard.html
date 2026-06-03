@@ -1,114 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="scroll-smooth" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Dashboard - CenterBuddy</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] }, colors: { primary: '#6366f1', accent: '#f472b6' } } }
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - CenterBuddy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "background": "#f8f9fa", "primary": "#004655", "primary-container": "#005f73",
+        "on-primary": "#ffffff", "on-primary-container": "#91d7ee", "secondary": "#845400",
+        "secondary-container": "#ffa91e", "on-secondary": "#ffffff",
+        "surface-container-lowest": "#ffffff", "surface-container-high": "#e7e8e9",
+        "surface-container": "#edeeef", "on-surface": "#191c1d", "on-surface-variant": "#3f484c",
+        "outline-variant": "#bfc8cc", "tertiary": "#004749", "tertiary-container": "#006163",
+        "on-tertiary": "#ffffff", "on-tertiary-container": "#72dde0",
+        "error": "#ba1a1a", "error-container": "#ffdad6", "surface-dim": "#d9dadb",
+        "surface-bright": "#f8f9fa", "primary-fixed": "#b2ebff", "primary-fixed-dim": "#8bd1e8",
+        "inverse-surface": "#2e3132", "inverse-on-surface": "#f0f1f2", "inverse-primary": "#8bd1e8"
+      }
     }
-  </script>
-  <style>
-    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-    .text-gradient { background: linear-gradient(to right, #6366f1, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  </style>
+  }
+}
+</script>
+<style>
+body { font-family: 'Inter', sans-serif; }
+h1, h2, h3 { font-family: 'Public Sans', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.fill-icon { font-variation-settings: 'FILL' 1; }
+</style>
 </head>
-<body class="bg-zinc-950 text-white font-sans antialiased">
-  <nav class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="../index.html" class="flex items-center gap-2">
-        <svg class="w-8 h-8" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="url(#dashG)"/><path d="M20 10L28 26H12L20 10Z" fill="white"/><defs><linearGradient id="dashG" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#f472b6"/></linearGradient></defs></svg>
-        <span class="text-xl font-bold text-gradient">CenterBuddy</span>
-      </a>
-      <div class="flex items-center gap-4">
-        <span class="text-sm text-gray-400">Welcome, Rahul!</span>
-        <a href="login.html" class="text-sm text-gray-400 hover:text-white transition">Logout</a>
-      </div>
-    </div>
-  </nav>
+<body class="bg-background text-on-surface">
 
-  <div class="max-w-7xl mx-auto px-4 py-8">
-    <!-- Exam Card -->
-    <div class="bg-gradient-to-br from-primary/20 to-accent/20 border border-white/10 rounded-2xl p-6 mb-8">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div class="text-sm text-gray-400">Your Exam</div>
-          <div class="text-2xl font-bold mt-1">NEET 2026</div>
-          <div class="flex items-center gap-4 mt-2 text-sm text-gray-400">
-            <span>📍 Delhi Center</span>
-            <span>📅 May 4, 2026</span>
-          </div>
-        </div>
-        <div class="text-right">
-          <div class="text-sm text-gray-400">Days Remaining</div>
-          <div class="text-4xl font-bold text-primary">47</div>
-        </div>
-      </div>
-    </div>
+<!-- TopAppBar -->
+<header class="bg-background/70 backdrop-blur-xl docked top-0 sticky z-50 border-b border-outline-variant/20 h-20">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-sm">
+<span class="font-display text-headline-md font-bold text-primary">CenterBuddy</span>
+</div>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">My Centers</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Stay</a>
+</nav>
+<div class="flex items-center gap-md">
+<button id="themeToggle" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined sun-icon">dark_mode</span>
+<span class="material-symbols-outlined moon-icon hidden">light_mode</span>
+</button>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+<a href="login.html" class="text-primary font-label-md text-label-md hover:underline">Logout</a>
+</div>
+</div>
+</header>
 
-    <!-- Quick Actions -->
-    <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      <div class="bg-white/5 border border-white/10 rounded-xl p-5 hover:scale-105 transition cursor-pointer">
-        <div class="text-2xl mb-2">🍔</div>
-        <div class="font-medium">Find Food</div>
-        <div class="text-xs text-gray-500 mt-1">12 verified spots nearby</div>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-xl p-5 hover:scale-105 transition cursor-pointer">
-        <div class="text-2xl mb-2">🏨</div>
-        <div class="font-medium">Find Stay</div>
-        <div class="text-xs text-gray-500 mt-1">4 hotels available</div>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-xl p-5 hover:scale-105 transition cursor-pointer">
-        <div class="text-2xl mb-2">🗺️</div>
-        <div class="font-medium">Navigate</div>
-        <div class="text-xs text-gray-500 mt-1">Get directions</div>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-xl p-5 hover:scale-105 transition cursor-pointer">
-        <div class="text-2xl mb-2">⭐</div>
-        <div class="font-medium">Review Center</div>
-        <div class="text-xs text-gray-500 mt-1">Share experience</div>
-      </div>
-    </div>
+<main class="max-w-container-max mx-auto px-gutter py-lg">
+<!-- Exam Card -->
+<div class="bg-gradient-to-br from-primary-container to-primary rounded-2xl p-lg text-on-primary-container mb-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="px-sm py-xs bg-on-primary-container/20 rounded-full font-label-sm text-label-sm">Upcoming</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg mb-xs">NEET 2026</h1>
+<div class="flex items-center gap-md text-body-md text-on-primary-container/80">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-body-sm">location_on</span> Delhi Center</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-body-sm">event</span> May 4, 2026</span>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label-sm text-label-sm opacity-80">Days Remaining</div>
+<div class="font-headline-lg text-headline-lg">47</div>
+</div>
+</div>
+</div>
 
-    <!-- Nearby Places -->
-    <h2 class="text-xl font-semibold mb-4">Nearby Places</h2>
-    <div class="space-y-3">
-      <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between">
-        <div class="flex items-center gap-4">
-          <div class="text-2xl">🍛</div>
-          <div>
-            <div class="font-medium">Sharma Dhaba</div>
-            <div class="text-xs text-gray-500">North Indian • 0.3 km away</div>
-          </div>
-        </div>
-        <div class="flex items-center gap-1 text-yellow-400 text-sm">★★★★★ <span class="text-gray-400">(4.8)</span></div>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between">
-        <div class="flex items-center gap-4">
-          <div class="text-2xl">🏨</div>
-          <div>
-            <div class="font-medium">Hotel Sunrise</div>
-            <div class="text-xs text-gray-500">Budget Stay • 0.5 km away</div>
-          </div>
-        </div>
-        <div class="flex items-center gap-1 text-yellow-400 text-sm">★★★★☆ <span class="text-gray-400">(4.5)</span></div>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between">
-        <div class="flex items-center gap-4">
-          <div class="text-2xl">☕</div>
-          <div>
-            <div class="font-medium">Campus Cafe</div>
-            <div class="text-xs text-gray-500">Quick Bites • 0.2 km away</div>
-          </div>
-        </div>
-        <div class="flex items-center gap-1 text-yellow-400 text-sm">★★★★★ <span class="text-gray-400">(4.9)</span></div>
-      </div>
-    </div>
-  </div>
+<!-- Quick Actions -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md mb-lg">
+<a href="#" class="bg-surface-container-lowest rounded-xl p-md flex flex-col items-center gap-sm hover:shadow-md transition-all border border-outline-variant/30">
+<span class="material-symbols-outlined fill-icon text-primary text-[32px]">restaurant</span>
+<span class="font-label-md text-label-md text-primary">Find Food</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">12 spots nearby</span>
+</a>
+<a href="#" class="bg-surface-container-lowest rounded-xl p-md flex flex-col items-center gap-sm hover:shadow-md transition-all border border-outline-variant/30">
+<span class="material-symbols-outlined fill-icon text-secondary text-[32px]">hotel</span>
+<span class="font-label-md text-label-md text-primary">Find Stay</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">4 verified hotels</span>
+</a>
+<a href="#" class="bg-surface-container-lowest rounded-xl p-md flex flex-col items-center gap-sm hover:shadow-md transition-all border border-outline-variant/30">
+<span class="material-symbols-outlined fill-icon text-tertiary text-[32px]">near_me</span>
+<span class="font-label-md text-label-md text-primary">Navigate</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Get directions</span>
+</a>
+<a href="#" class="bg-surface-container-lowest rounded-xl p-md flex flex-col items-center gap-sm hover:shadow-md transition-all border border-outline-variant/30">
+<span class="material-symbols-outlined fill-icon text-secondary-container text-[32px]">star</span>
+<span class="font-label-md text-label-md text-primary">Review</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Share experience</span>
+</a>
+</div>
+
+<!-- My Exam Centers -->
+<div class="mb-lg">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-md text-headline-md text-primary">My Exam Centers</h2>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Center 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden hover:shadow-md transition-all border border-outline-variant/30">
+<div class="h-32 bg-gradient-to-br from-primary/20 to-primary-container/30 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-[48px] text-primary/40">school</span>
+<div class="absolute top-sm right-sm px-sm py-xs bg-secondary text-on-secondary rounded-full font-label-sm text-label-sm">Primary</div>
+</div>
+<div class="p-md">
+<h3 class="font-label-md text-label-md text-primary mb-xs">NTA Model Exam Center, Rohini</h3>
+<p class="text-body-sm text-on-surface-variant flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Sector 14, Delhi
+</p>
+<div class="flex items-center gap-xs text-secondary mb-sm">
+<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
+<span class="font-label-sm text-label-sm">4.8 (1,240 reviews)</span>
+</div>
+<button class="w-full py-xs border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors">
+View Details
+</button>
+</div>
+</div>
+
+<!-- Center 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden hover:shadow-md transition-all border border-outline-variant/30">
+<div class="h-32 bg-gradient-to-br from-secondary/20 to-secondary-container/30 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-[48px] text-secondary/40">school</span>
+<div class="absolute top-sm right-sm px-sm py-xs bg-primary text-on-primary rounded-full font-label-sm text-label-sm">Backup</div>
+</div>
+<div class="p-md">
+<h3 class="font-label-md text-label-md text-primary mb-xs">iON Digital Zone, Noida</h3>
+<p class="text-body-sm text-on-surface-variant flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Sector 62, Noida
+</p>
+<div class="flex items-center gap-xs text-secondary mb-sm">
+<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
+<span class="font-label-sm text-label-sm">4.6 (890 reviews)</span>
+</div>
+<button class="w-full py-xs border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors">
+View Details
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Nearby Places -->
+<div class="mb-lg">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-md text-headline-md text-primary">Nearby Places</h2>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="bg-surface-container-low rounded-xl p-md flex items-center gap-md hover:shadow-md transition-all">
+<div class="text-2xl">🍛</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md">Sharma Dhaba</h4>
+<p class="text-label-sm text-label-sm text-on-surface-variant">North Indian • 0.3km</p>
+</div>
+<div class="flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
+<span class="font-label-sm text-label-sm">4.8</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md flex items-center gap-md hover:shadow-md transition-all">
+<div class="text-2xl">🏨</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md">Hotel Sunrise</h4>
+<p class="text-label-sm text-label-sm text-on-surface-variant">Budget Stay • 0.5km</p>
+</div>
+<div class="flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
+<span class="font-label-sm text-label-sm">4.5</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md flex items-center gap-md hover:shadow-md transition-all">
+<div class="text-2xl">☕</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md">Campus Cafe</h4>
+<p class="text-label-sm text-label-sm text-on-surface-variant">Quick Bites • 0.2km</p>
+</div>
+<div class="flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
+<span class="font-label-sm text-label-sm">4.9</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Bottom Nav (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 bg-surface/80 backdrop-blur-md border-t border-outline-variant/30 z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-primary" href="#">
+<span class="material-symbols-outlined fill-icon">home</span>
+<span class="font-label-sm text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-sm text-[10px]">Centers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">bed</span>
+<span class="font-label-sm text-[10px]">Stay</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-[10px]">Profile</span>
+</a>
+</nav>
+
+<script>
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+if (localStorage.getItem('theme') === 'dark') html.classList.add('dark');
+
+themeToggle.addEventListener('click', () => {
+  html.classList.toggle('dark');
+  document.querySelector('.sun-icon').classList.toggle('hidden');
+  document.querySelector('.moon-icon').classList.toggle('hidden');
+  localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+});
+</script>
 </body>
 </html>
