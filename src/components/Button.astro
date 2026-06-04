@@ -1,0 +1,40 @@
+---
+interface Props {
+  name: string;
+  type?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  href?: string;
+  disabled?: boolean;
+}
+
+const { name, type = 'primary', size = 'md', class: className = '', href, disabled = false } = Astro.props;
+
+const baseClasses = 'inline-flex items-center justify-center font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary)] disabled:opacity-50 disabled:cursor-not-allowed';
+
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm rounded-lg',
+  md: 'px-6 py-3 text-base rounded-xl',
+  lg: 'px-8 py-4 text-lg rounded-xl',
+};
+
+const typeClasses = {
+  primary: 'btn-primary text-white',
+  secondary: 'btn-secondary text-white',
+  outline: 'border-2 border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white',
+};
+
+const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${typeClasses[type]} ${className}`;
+---
+
+{href ? (
+  <a href={href} class:list={[combinedClasses, { 'pointer-events-none': disabled }]}>
+    <slot />
+    {name}
+  </a>
+) : (
+  <button class:list={[combinedClasses]} disabled={disabled}>
+    <slot />
+    {name}
+  </button>
+)}

@@ -1,0 +1,87 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import { reviews, examCenters } from '../../../data/data';
+
+function getCenterName(centerId: string) {
+  const center = examCenters.find(c => c.id === centerId);
+  return center ? center.name : 'Unknown Center';
+}
+---
+
+<Layout title="Manage Reviews - Admin">
+  <Navbar />
+
+  <main class="pt-24 pb-12 min-h-screen bg-gray-50 dark:bg-dark-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-3xl font-bold font-display text-gray-900 dark:text-white">Manage Reviews</h1>
+          <p class="text-gray-600 dark:text-gray-400">Moderate user-submitted reviews</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <select class="input-field text-sm">
+            <option value="">All Status</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        {reviews.map((review) => (
+          <div class="glass-card p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-tertiary)] flex items-center justify-center text-white font-bold">
+                  {review.author.charAt(0)}
+                </div>
+                <div>
+                  <div class="font-semibold text-gray-900 dark:text-white">{review.author}</div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">{review.date}</div>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Approved</span>
+            </div>
+
+            <div class="flex items-center space-x-2 mb-3">
+              <span class="text-sm text-gray-500 dark:text-gray-400">For:</span>
+              <span class="font-medium text-gray-900 dark:text-white text-sm">{getCenterName(review.centerId)}</span>
+              <span class="px-2 py-0.5 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-xs">{review.examType}</span>
+            </div>
+
+            <p class="text-gray-600 dark:text-gray-400 mb-4">{review.comment}</p>
+
+            <div class="flex items-center space-x-1 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <span class={`text-lg ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>
+              ))}
+            </div>
+
+            <div class="flex items-center space-x-2 pt-4 border-t border-gray-100 dark:border-gray-800">
+              <button class="flex-1 btn-primary text-sm py-2">Approve</button>
+              <button class="px-3 py-2 rounded-xl border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-red-500 hover:text-red-500 transition-colors text-sm">
+                Reject
+              </button>
+              <button class="p-2 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-[var(--color-primary)] transition-colors">
+                <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        ))}
+
+        <div class="glass-card p-6 border-2 border-dashed border-gray-300 dark:border-gray-700 flex flex-col items-center justify-center text-center">
+          <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Add New Review</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Manually add a verified review</p>
+          <button class="btn-primary text-sm">Add Review</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

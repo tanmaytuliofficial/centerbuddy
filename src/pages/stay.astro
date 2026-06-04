@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { hotels, examCenters } from '../../data/data';
+
+const selectedCity = Astro.url.searchParams.get('city') || 'All';
+const cities = ['All', ...new Set(hotels.map(h => h.city))];
+const filteredHotels = selectedCity === 'All' ? hotels : hotels.filter(h => h.city === selectedCity);
+
+const primaryCenter = examCenters[1];
+---
+
+<Layout title="My Stay">
+  <Navbar />
+
+  <main class="pt-24 pb-12 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-2">
+          My Stay
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400">Find the perfect accommodation near your exam center</p>
+      </div>
+
+      <div class="glass-card p-6 mb-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-semibold text-gray-900 dark:text-white mb-1">Your Exam Center</h2>
+            <p class="text-gray-600 dark:text-gray-400">{primaryCenter.name}, {primaryCenter.city}</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="text-right">
+              <div class="text-sm text-gray-500 dark:text-gray-400">Exam Date</div>
+              <div class="font-semibold text-gray-900 dark:text-white">May 5, 2026</div>
+            </div>
+            <a href={`https://www.google.com/maps/dir/?api=1&destination=${primaryCenter.lat},${primaryCenter.lng}`} target="_blank" class="btn-primary flex items-center space-x-2 text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              <span>Directions</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Available Hotels</h2>
+        <select id="city-filter" class="input-field max-w-xs text-sm">
+          {cities.map(city => (
+            <option value={city} selected={selectedCity === city}>{city}</option>
+          ))}
+        </select>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredHotels.map((hotel) => (
+          <div class="glass-card overflow-hidden card-hover group">
+            <div class="relative">
+              <img src={hotel.image} alt={hotel.name} class="w-full h-48 object-cover" loading="lazy" />
+              <div class="absolute top-4 right-4">
+                <span class="px-3 py-1 rounded-full bg-white/90 dark:bg-gray-900/90 text-sm font-bold text-[var(--color-primary)]">
+                  ₹{hotel.price.toLocaleString()}/night
+                </span>
+              </div>
+              <div class="absolute bottom-4 left-4 flex items-center space-x-2">
+                <span class="px-2 py-1 rounded-lg bg-white/90 dark:bg-gray-900/90 text-sm">
+                  <span class="text-yellow-500">★</span> {hotel.rating}
+                </span>
+                <span class="text-white text-sm drop-shadow-lg">{hotel.reviewCount} reviews</span>
+              </div>
+            </div>
+
+            <div class="p-5">
+              <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1">{hotel.name}</h3>
+              <p class="text-gray-500 dark:text-gray-400 text-sm mb-3">{hotel.address}</p>
+
+              <div class="flex items-center space-x-2 mb-4">
+                <svg class="w-4 h-4 text-[var(--color-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                </svg>
+                <span class="text-sm text-gray-600 dark:text-gray-400">{hotel.distance} from center</span>
+              </div>
+
+              <div class="mb-4">
+                <div class="text-xs text-gray-500 dark:text-gray-400 mb-2">Amenities</div>
+                <div class="flex flex-wrap gap-2">
+                  {hotel.amenities.slice(0, 3).map((amenity) => (
+                    <span class="px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-400">
+                      {amenity}
+                    </span>
+                  ))}
+                  {hotel.amenities.length > 3 && (
+                    <span class="px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-400">
+                      +{hotel.amenities.length - 3} more
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 text-sm mb-4">
+                <div class="p-3 rounded-lg bg-green-50 dark:bg-green-900/20">
+                  <div class="text-xs text-gray-500 dark:text-gray-400">Check-in</div>
+                  <div class="font-semibold text-gray-900 dark:text-white">{hotel.checkInTime}</div>
+                </div>
+                <div class="p-3 rounded-lg bg-red-50 dark:bg-red-900/20">
+                  <div class="text-xs text-gray-500 dark:text-gray-400">Check-out</div>
+                  <div class="font-semibold text-gray-900 dark:text-white">{hotel.checkOutTime}</div>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-2">
+                <button class="flex-1 btn-primary text-sm py-3">Book Now</button>
+                <button class="px-3 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-[var(--color-primary)] transition-colors">
+                  <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const cityFilter = document.getElementById('city-filter');
+  if (cityFilter) {
+    cityFilter.addEventListener('change', (e) => {
+      const city = (e.target as HTMLSelectElement).value;
+      const url = new URL(window.location.href);
+      if (city === 'All') {
+        url.searchParams.delete('city');
+      } else {
+        url.searchParams.set('city', city);
+      }
+      window.location.href = url.toString();
+    });
+  }
+</script>

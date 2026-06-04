@@ -1,0 +1,148 @@
+---
+import { examCenters } from '../data/data';
+---
+
+<div id="map" class="w-full h-full min-h-[500px] rounded-2xl"></div>
+
+<script>
+  import maplibregl from 'maplibre-gl';
+
+  const centers = [
+    { id: 'ctr-001', name: 'Delhi Public School', city: 'Delhi NCR', lat: 28.6139, lng: 77.2090, rating: 4.5 },
+    { id: 'ctr-002', name: 'Allen Career Institute', city: 'Kota', lat: 25.2138, lng: 75.8648, rating: 4.8 },
+    { id: 'ctr-003', name: 'FIITJEE Limited', city: 'Delhi NCR', lat: 28.5749, lng: 77.2090, rating: 4.6 },
+    { id: 'ctr-004', name: 'Vidyamandir Classes', city: 'Kota', lat: 25.1738, lng: 75.8748, rating: 4.7 },
+    { id: 'ctr-005', name: 'Narayana College', city: 'Bangalore', lat: 12.9716, lng: 77.5946, rating: 4.4 },
+    { id: 'ctr-006', name: 'Resonance College', city: 'Jaipur', lat: 26.9124, lng: 75.7873, rating: 4.5 },
+    { id: 'ctr-007', name: 'Bansal Classes', city: 'Kota', lat: 25.2338, lng: 75.8448, rating: 4.8 },
+    { id: 'ctr-008', name: 'Sri Chaitanya College', city: 'Hyderabad', lat: 17.3850, lng: 78.4867, rating: 4.3 },
+    { id: 'ctr-009', name: 'Eden College', city: 'Mumbai', lat: 19.0760, lng: 72.8777, rating: 4.2 },
+    { id: 'ctr-010', name: 'Unacademy Center', city: 'Pune', lat: 18.5204, lng: 73.8567, rating: 4.6 },
+    { id: 'ctr-011', name: 'Physics Wallah Center', city: 'Lucknow', lat: 26.8467, lng: 80.9462, rating: 4.4 },
+    { id: 'ctr-012', name: 'Aakash Institute', city: 'Chandigarh', lat: 30.7333, lng: 76.7794, rating: 4.5 },
+    { id: 'ctr-013', name: 'Catalyst College', city: 'Ahmedabad', lat: 23.0225, lng: 72.5714, rating: 4.3 },
+    { id: 'ctr-014', name: 'JEE Main Center', city: 'Kolkata', lat: 22.5726, lng: 88.3639, rating: 4.7 },
+    { id: 'ctr-015', name: 'Career Point College', city: 'Chennai', lat: 13.0827, lng: 80.2707, rating: 4.4 },
+    { id: 'ctr-016', name: 'CUET Test Center', city: 'Delhi NCR', lat: 28.6539, lng: 77.1890, rating: 4.2 },
+    { id: 'ctr-017', name: 'UPSC Exam Center', city: 'Delhi NCR', lat: 28.6339, lng: 77.2190, rating: 4.6 },
+    { id: 'ctr-018', name: 'SSC Exam Hall', city: 'Mumbai', lat: 19.0160, lng: 72.8677, rating: 4.1 },
+    { id: 'ctr-019', name: 'NEET Exam Center', city: 'Jaipur', lat: 26.9524, lng: 75.7673, rating: 4.8 },
+    { id: 'ctr-020', name: 'JEE Advanced Center', city: 'Bangalore', lat: 12.9916, lng: 77.6046, rating: 4.9 },
+  ];
+
+  function initMap() {
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: {
+        version: 8,
+        sources: {
+          'osm': {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256,
+            attribution: '© OpenStreetMap contributors'
+          }
+        },
+        layers: [
+          {
+            id: 'osm',
+            type: 'raster',
+            source: 'osm',
+            minzoom: 0,
+            maxzoom: 19
+          }
+        ]
+      },
+      center: [78.9629, 20.5937],
+      zoom: 4.5
+    });
+
+    map.addControl(new maplibregl.NavigationControl(), 'top-right');
+    map.addControl(new maplibregl.FullscreenControl());
+
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      map.setPaintProperty('osm', 'raster-opacity', 0.7);
+    }
+
+    const markers: maplibregl.Marker[] = [];
+
+    centers.forEach((center) => {
+      const el = document.createElement('div');
+      el.className = 'marker-pin';
+      el.style.backgroundColor = getRatingColor(center.rating);
+
+      const rating = Math.round(center.rating * 10) / 10;
+      el.innerHTML = `<span style="transform: rotate(45deg); color: white; font-size: 10px; font-weight: bold;">${rating}</span>`;
+
+      const popup = new maplibregl.Popup({ offset: 25, closeButton: true, closeOnClick: false });
+      popup.setHTML(`
+        <div class="p-2">
+          <h3 class="font-bold text-lg mb-1">${center.name}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">${center.city}</p>
+          <div class="flex items-center mt-2">
+            <span class="text-yellow-500">★</span>
+            <span class="ml-1 text-sm font-medium">${center.rating}</span>
+          </div>
+        </div>
+      `);
+
+      const marker = new maplibregl.Marker({ element: el })
+        .setLngLat([center.lng, center.lat])
+        .setPopup(popup)
+        .addTo(map);
+
+      markers.push(marker);
+    });
+
+    return { map, markers };
+  }
+
+  function getRatingColor(rating: number): string {
+    if (rating >= 4.7) return '#10b981';
+    if (rating >= 4.3) return '#22c55e';
+    if (rating >= 4.0) return '#84cc16';
+    return '#eab308';
+  }
+
+  if (typeof window !== 'undefined') {
+    const mapContainer = document.getElementById('map');
+    if (mapContainer) {
+      let mapInstance: { map: maplibregl.Map; markers: maplibregl.Marker[] } | null = null;
+
+      const initOnLoad = () => {
+        if (!mapInstance) {
+          mapInstance = initMap();
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initOnLoad);
+      } else {
+        initOnLoad();
+      }
+    }
+  }
+</script>
+
+<style is:global>
+  .maplibregl-ctrl-group {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .dark .maplibregl-ctrl-group {
+    background: rgba(26, 38, 52, 0.9) !important;
+  }
+
+  .maplibregl-ctrl-group button {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .maplibregl-ctrl-fullscreen {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+</style>

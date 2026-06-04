@@ -1,0 +1,232 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import IndiaMap from '../components/IndiaMap.astro';
+---
+
+<Layout title="Home">
+  <Navbar />
+
+  <main class="pt-16">
+    <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/5 via-transparent to-[var(--color-secondary)]/5"></div>
+      <div class="absolute top-20 left-10 w-72 h-72 bg-[var(--color-primary)]/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-[var(--color-tertiary)]/10 rounded-full blur-3xl"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="text-center lg:text-left">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-card mb-6">
+              <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Trusted by 50,000+ Students</span>
+            </div>
+
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold font-display mb-6 leading-tight">
+              <span class="text-gradient">Your Exam</span>
+              <br />
+              <span class="text-gray-900 dark:text-white">Journey Partner</span>
+            </h1>
+
+            <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0">
+              Find the perfect exam center, book comfortable stays, discover nearby food, and plan your route - all in one place.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+              <a href="/dashboard" class="btn-primary flex items-center space-x-2 w-full sm:w-auto justify-center">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Go to Dashboard</span>
+              </a>
+              <a href="/centers" class="btn-secondary flex items-center space-x-2 w-full sm:w-auto justify-center">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                </svg>
+                <span>Explore Centers</span>
+              </a>
+            </div>
+
+            <div class="mt-12 flex items-center justify-center lg:justify-start space-x-8">
+              {[
+                { value: '50K+', label: 'Students' },
+                { value: '500+', label: 'Centers' },
+                { value: '20+', label: 'Cities' },
+                { value: '4.8★', label: 'Rating' },
+              ].map((stat) => (
+                <div class="text-center">
+                  <div class="text-2xl md:text-3xl font-bold text-[var(--color-primary)]">{stat.value}</div>
+                  <div class="text-sm text-gray-500">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="relative h-[500px] lg:h-[600px]">
+            <div class="absolute inset-0 glass-card rounded-3xl overflow-hidden shadow-2xl">
+              <IndiaMap />
+            </div>
+            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-tertiary)] rounded-2xl opacity-20 blur-xl"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-[var(--color-primary)]/5 dark:bg-transparent">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="Everything You Need"
+          subtitle="Comprehensive exam logistics support from center discovery to successful exam completion"
+        />
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z" />',
+              title: 'Center Discovery',
+              description: 'Find verified exam centers across 20+ cities with real reviews and ratings',
+            },
+            {
+              icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />',
+              title: 'Stay Booking',
+              description: 'Book hotels near your exam center with verified amenities and reviews',
+            },
+            {
+              icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />',
+              title: 'Route Planning',
+              description: 'Get accurate directions to your exam center with traffic updates',
+            },
+            {
+              icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />',
+              title: 'Exam Countdown',
+              description: 'Never miss an exam with smart countdown timers and reminders',
+            },
+          ].map((feature, i) => (
+            <div class="glass-card p-6 card-hover group" style={`animation-delay: ${i * 100}ms`}>
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-tertiary)] flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={feature.icon} />
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{feature.title}</h3>
+              <p class="text-gray-600 dark:text-gray-400">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="Supported Exams"
+          subtitle="Comprehensive coverage of all major Indian competitive exams"
+        />
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[
+            { name: 'JEE Main', color: 'from-blue-500 to-blue-700' },
+            { name: 'JEE Advanced', color: 'from-purple-500 to-purple-700' },
+            { name: 'NEET', color: 'from-green-500 to-green-700' },
+            { name: 'CUET', color: 'from-orange-500 to-orange-700' },
+            { name: 'UPSC', color: 'from-red-500 to-red-700' },
+            { name: 'SSC', color: 'from-teal-500 to-teal-700' },
+            { name: 'GATE', color: 'from-pink-500 to-pink-700' },
+            { name: 'CLAT', color: 'from-indigo-500 to-indigo-700' },
+            { name: 'CAT', color: 'from-yellow-500 to-yellow-700' },
+            { name: 'XAT', color: 'from-cyan-500 to-cyan-700' },
+          ].map((exam) => (
+            <div class={`glass-card p-4 text-center card-hover bg-gradient-to-br ${exam.color}`}>
+              <span class="text-white font-bold">{exam.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-[var(--color-secondary)]/5 dark:bg-transparent">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="What Students Say"
+          subtitle="Join thousands of successful students who trusted CenterBuddy"
+        />
+
+        <div class="grid md:grid-cols-3 gap-8">
+          {[
+            {
+              name: 'Amit Sharma',
+              exam: 'JEE Main 2026',
+              rating: 5,
+              text: 'CenterBuddy made my exam journey so smooth! Found a great hotel near my center and the route planner saved me on exam day.',
+              city: 'Delhi NCR',
+            },
+            {
+              name: 'Priya Gupta',
+              exam: 'NEET 2026',
+              rating: 5,
+              text: 'The countdown timer kept me motivated. Found amazing food places near my center. Highly recommended for all aspirants!',
+              city: 'Kota',
+            },
+            {
+              name: 'Rahul Verma',
+              exam: 'CUET 2026',
+              rating: 4,
+              text: 'Best platform for exam logistics. The map feature is super helpful. Saved both time and money on my exam preparations.',
+              city: 'Mumbai',
+            },
+          ].map((testimonial) => (
+            <div class="glass-card p-6 card-hover">
+              <div class="flex items-center space-x-1 mb-4">
+                {[...Array(testimonial.rating)].map(() => (
+                  <span class="text-yellow-400">★</span>
+                ))}
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 mb-6 italic">"{testimonial.text}"</p>
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-tertiary)] flex items-center justify-center text-white font-bold">
+                  {testimonial.name.charAt(0)}
+                </div>
+                <div>
+                  <div class="font-semibold text-gray-900 dark:text-white">{testimonial.name}</div>
+                  <div class="text-sm text-gray-500">{testimonial.exam} • {testimonial.city}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-card p-12 md:p-16 text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-[var(--color-primary)]/10 rounded-full blur-3xl"></div>
+          <div class="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-secondary)]/10 rounded-full blur-3xl"></div>
+
+          <h2 class="text-4xl md:text-5xl font-bold font-display text-gradient mb-6 relative z-10">
+            Ready to Ace Your Exam?
+          </h2>
+          <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto relative z-10">
+            Join 50,000+ students who trust CenterBuddy for their exam logistics. Start planning your perfect exam day today.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 relative z-10">
+            <a href="/dashboard" class="btn-primary flex items-center space-x-2">
+              <span>Get Started Free</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a href="/centers" class="text-[var(--color-primary)] font-semibold hover:text-[var(--color-tertiary)] transition-colors flex items-center space-x-2">
+              <span>Browse Centers</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
