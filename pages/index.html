@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CenterBuddy | India's Exam Logistics Platform</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="nav-header" id="navbar">
+    <div class="container flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary" style="font-size:28px">school</span>
+        <span class="font-bold text-lg text-primary">CenterBuddy</span>
+      </a>
+      <nav class="desktop-nav hidden md:flex items-center gap-md">
+        <a href="#features" class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">Features</a>
+        <a href="#cities" class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">Cities</a>
+        <a href="#centers" class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">Centers</a>
+      </nav>
+      <div class="flex items-center gap-sm">
+        <button id="themeToggle" class="p-sm rounded-full hover:bg-surface-container transition-colors">
+          <span class="material-symbols-outlined sun-icon">dark_mode</span>
+          <span class="material-symbols-outlined moon-icon hidden">light_mode</span>
+        </button>
+        <a href="login.html" class="btn btn-outline hidden sm:inline-flex">Login</a>
+        <a href="register.html" class="btn btn-primary hidden sm:inline-flex">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="bg-gradient py-lg" style="background:linear-gradient(135deg,var(--primary) 0%,var(--primary-container) 100%)">
+      <div class="container py-lg text-center">
+        <div class="max-w-3xl mx-auto">
+          <h1 class="text-on-primary mb-md">India's First<br>Exam-Day Logistics Platform</h1>
+          <p class="text-lg text-on-primary opacity-80 mb-lg">Helping students and parents navigate exam centers with live guidance, verified reviews, and real-time updates.</p>
+          <div class="glass-card p-md max-w-2xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-sm">
+              <div class="flex-1 flex items-center gap-sm px-md">
+                <span class="material-symbols-outlined text-primary">search</span>
+                <input type="text" placeholder="Search by Center Name or Code" class="flex-1 border-0 bg-transparent p-0">
+              </div>
+              <div class="h-8 w-[1px] bg-outline-variant hidden md:block"></div>
+              <div class="flex items-center px-md gap-sm">
+                <span class="material-symbols-outlined text-primary">location_on</span>
+                <select class="bg-transparent border-0 p-0 text-sm">
+                  <option>Delhi NCR</option>
+                  <option>Mumbai</option>
+                  <option>Kota</option>
+                  <option>Bangalore</option>
+                  <option>Jaipur</option>
+                  <option>Chennai</option>
+                  <option>Hyderabad</option>
+                  <option>Pune</option>
+                  <option>Kolkata</option>
+                  <option>Lucknow</option>
+                  <option>Chandigarh</option>
+                  <option>Ahmedabad</option>
+                </select>
+              </div>
+              <button class="btn btn-secondary">Find Center</button>
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-center gap-sm mt-md">
+            <span class="text-sm text-on-primary opacity-70">Popular:</span>
+            <button class="badge badge-secondary">NEET 2026</button>
+            <button class="badge badge-secondary">JEE Mains</button>
+            <button class="badge badge-secondary">CUET</button>
+            <button class="badge badge-secondary">UPSC</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-lg ticker bg-secondary-container">
+      <div class="ticker">
+        <div class="ticker-content flex gap-xl text-on-secondary-container">
+          <span class="flex items-center gap-xs text-sm"><span class="material-symbols-outlined text-xs">info</span> LIVE: Heavy traffic near Sector 62, Noida (JEE Main Shift 1)</span>
+          <span class="flex items-center gap-xs text-sm"><span class="material-symbols-outlined text-xs">check_circle</span> All centers in South Delhi reporting normal flow for NEET</span>
+          <span class="flex items-center gap-xs text-sm"><span class="material-symbols-outlined text-xs">warning</span> Metro delays expected on Yellow Line</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-lg" id="features">
+      <h2 class="text-center text-primary mb-lg">Why Choose CenterBuddy?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div class="card p-lg text-center">
+          <div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center mx-auto mb-md">
+            <span class="material-symbols-outlined text-primary" style="font-size:32px">verified</span>
+          </div>
+          <h3 class="text-primary mb-sm">Verified Reviews</h3>
+          <p class="text-sm text-on-surface-variant">Real feedback from parents and students who visited the center last week.</p>
+        </div>
+        <div class="card p-lg text-center">
+          <div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center mx-auto mb-md">
+            <span class="material-symbols-outlined text-primary" style="font-size:32px">traffic</span>
+          </div>
+          <h3 class="text-primary mb-sm">Traffic Predictions</h3>
+          <p class="text-sm text-on-surface-variant">Intelligent route planning considering exam-day specific congestion patterns.</p>
+        </div>
+        <div class="card p-lg text-center">
+          <div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center mx-auto mb-md">
+            <span class="material-symbols-outlined text-primary" style="font-size:32px">king_bed</span>
+          </div>
+          <h3 class="text-primary mb-sm">Stay & Rest</h3>
+          <p class="text-sm text-on-surface-variant">Handpicked hotels within 2km radius that guarantee quiet, exam-ready rooms.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-lg" id="centers">
+      <div class="flex items-end justify-between mb-lg">
+        <div>
+          <h2 class="text-primary">Featured Exam Clusters</h2>
+          <p class="text-sm text-on-surface-variant">Most searched centers with verified logistics and parent reviews.</p>
+        </div>
+        <a href="#" class="text-primary text-sm font-medium hidden sm:flex items-center gap-xs">View all <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+        <div class="card">
+          <div class="h-48 bg-gradient-to-br from-primary/20 to-primary-container/30 flex items-center justify-center relative">
+            <div class="absolute top-sm right-sm badge badge-secondary">Top Rated</div>
+            <span class="material-symbols-outlined text-primary opacity-40" style="font-size:64px">school</span>
+          </div>
+          <div class="card-body">
+            <div class="flex justify-between items-start mb-sm">
+              <h4 class="text-primary font-semibold">iON Digital Zone, Noida</h4>
+              <div class="flex items-center gap-xs text-secondary">
+                <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL'1">star</span>
+                <span class="text-sm font-semibold">4.8</span>
+              </div>
+            </div>
+            <p class="text-sm text-on-surface-variant flex items-center gap-xs mb-sm">
+              <span class="material-symbols-outlined text-xs">location_on</span> Sector 62, Noida, UP
+            </p>
+            <div class="flex flex-wrap gap-xs mb-md">
+              <span class="badge badge-primary">Verified Parking</span>
+              <span class="badge badge-primary">Metro 500m</span>
+            </div>
+            <button class="btn btn-outline w-full">Route & Reviews</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="h-48 bg-gradient-to-br from-secondary/20 to-secondary-container/30 flex items-center justify-center relative">
+            <div class="absolute top-sm right-sm badge badge-primary">High Capacity</div>
+            <span class="material-symbols-outlined text-secondary opacity-40" style="font-size:64px">school</span>
+          </div>
+          <div class="card-body">
+            <div class="flex justify-between items-start mb-sm">
+              <h4 class="text-primary font-semibold">SRM University, Chennai</h4>
+              <div class="flex items-center gap-xs text-secondary">
+                <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL'1">star</span>
+                <span class="text-sm font-semibold">4.5</span>
+              </div>
+            </div>
+            <p class="text-sm text-on-surface-variant flex items-center gap-xs mb-sm">
+              <span class="material-symbols-outlined text-xs">location_on</span> Potheri, Kattankulathur
+            </p>
+            <div class="flex flex-wrap gap-xs mb-md">
+              <span class="badge badge-primary">Lounge for Parents</span>
+              <span class="badge badge-primary">Medical Desk</span>
+            </div>
+            <button class="btn btn-outline w-full">Route & Reviews</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="h-48 bg-gradient-to-br from-primary-container/20 to-tertiary-container/30 flex items-center justify-center relative">
+            <div class="absolute top-sm right-sm badge badge-secondary">Nearby Stay</div>
+            <span class="material-symbols-outlined text-primary opacity-40" style="font-size:64px">school</span>
+          </div>
+          <div class="card-body">
+            <div class="flex justify-between items-start mb-sm">
+              <h4 class="text-primary font-semibold">IDZ Powai, Mumbai</h4>
+              <div class="flex items-center gap-xs text-secondary">
+                <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL'1">star</span>
+                <span class="text-sm font-semibold">4.9</span>
+              </div>
+            </div>
+            <p class="text-sm text-on-surface-variant flex items-center gap-xs mb-sm">
+              <span class="material-symbols-outlined text-xs">location_on</span> Hiranandani, Mumbai
+            </p>
+            <div class="flex flex-wrap gap-xs mb-md">
+              <span class="badge badge-primary">Premium Parking</span>
+              <span class="badge badge-primary">AC Waiting Area</span>
+            </div>
+            <button class="btn btn-outline w-full">Route & Reviews</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-lg" id="cities">
+      <h2 class="text-center text-primary mb-lg">Exam Cities</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-md">
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3DB;</div>
+          <span class="font-semibold text-sm text-primary">Delhi NCR</span>
+          <p class="text-xs text-on-surface-variant">150+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3EB;</div>
+          <span class="font-semibold text-sm text-primary">Kota</span>
+          <p class="text-xs text-on-surface-variant">200+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3FC;</div>
+          <span class="font-semibold text-sm text-primary">Jaipur</span>
+          <p class="text-xs text-on-surface-variant">80+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3E0;</div>
+          <span class="font-semibold text-sm text-primary">Mumbai</span>
+          <p class="text-xs text-on-surface-variant">120+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3D4;</div>
+          <span class="font-semibold text-sm text-primary">Bangalore</span>
+          <p class="text-xs text-on-surface-variant">90+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x26F0;</div>
+          <span class="font-semibold text-sm text-primary">Pune</span>
+          <p class="text-xs text-on-surface-variant">70+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3F0;</div>
+          <span class="font-semibold text-sm text-primary">Lucknow</span>
+          <p class="text-xs text-on-surface-variant">65+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3D6;</div>
+          <span class="font-semibold text-sm text-primary">Chandigarh</span>
+          <p class="text-xs text-on-surface-variant">45+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3DB;</div>
+          <span class="font-semibold text-sm text-primary">Chennai</span>
+          <p class="text-xs text-on-surface-variant">85+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3EF;</div>
+          <span class="font-semibold text-sm text-primary">Hyderabad</span>
+          <p class="text-xs text-on-surface-variant">95+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3E2;</div>
+          <span class="font-semibold text-sm text-primary">Ahmedabad</span>
+          <p class="text-xs text-on-surface-variant">55+ centers</p>
+        </div>
+        <div class="card p-md text-center cursor-pointer hover-lift">
+          <div class="text-3xl mb-sm">&#x1F3EA;</div>
+          <span class="font-semibold text-sm text-primary">Kolkata</span>
+          <p class="text-xs text-on-surface-variant">60+ centers</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-lg bg-primary text-on-primary">
+      <div class="container text-center">
+        <h2 class="mb-sm">Ready to simplify exam day?</h2>
+        <p class="opacity-80 mb-lg">Join thousands of students and parents who trust CenterBuddy.</p>
+        <a href="register.html" class="btn btn-secondary">Get Started Free</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="#">City Centers</a>
+      <a href="#">Exam Categories</a>
+      <a href="#">Parent Resources</a>
+      <a href="#">Safety Protocols</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 CenterBuddy. Providing relief during India's most stressful days.</p>
+  </footer>
+
+  <nav class="mobile-nav md:hidden">
+    <a href="index.html" class="active">
+      <span class="material-symbols-outlined">home</span>
+      <span>Home</span>
+    </a>
+    <a href="#centers">
+      <span class="material-symbols-outlined">map</span>
+      <span>Centers</span>
+    </a>
+    <a href="#features">
+      <span class="material-symbols-outlined">info</span>
+      <span>Features</span>
+    </a>
+    <a href="#cities">
+      <span class="material-symbols-outlined">location_city</span>
+      <span>Cities</span>
+    </a>
+    <a href="login.html">
+      <span class="material-symbols-outlined">person</span>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+
+    themeToggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      sunIcon.classList.toggle('hidden');
+      moonIcon.classList.toggle('hidden');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark');
+      sunIcon.classList.add('hidden');
+      moonIcon.classList.remove('hidden');
+    }
+
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>

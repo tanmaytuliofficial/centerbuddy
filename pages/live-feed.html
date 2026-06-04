@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Feed | CenterBuddy</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-surface-container-low">
+  <header class="nav-header">
+    <div class="container flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary" style="font-size:28px">school</span>
+        <span class="font-bold text-lg text-primary hidden sm:block">CenterBuddy</span>
+      </a>
+      <div class="flex items-center gap-xs">
+        <div class="live-badge mr-sm hidden sm:flex">LIVE</div>
+        <button id="themeToggle" class="p-sm rounded-full hover:bg-surface-container transition-colors">
+          <span class="material-symbols-outlined sun-icon">dark_mode</span>
+          <span class="material-symbols-outlined moon-icon hidden">light_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container py-md pb-24">
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-md gap-sm">
+      <div>
+        <h1 class="text-primary font-bold text-2xl">Live Feed</h1>
+        <p class="text-sm text-on-surface-variant">Real-time updates from exam centers</p>
+      </div>
+      <div class="flex gap-sm">
+        <button class="btn btn-ghost text-sm p-sm">
+          <span class="material-symbols-outlined text-sm">filter_list</span>
+          <span class="hidden sm:inline">Filters</span>
+        </button>
+        <button class="btn btn-outline text-sm">
+          <span class="material-symbols-outlined text-sm">refresh</span>
+          <span class="hidden sm:inline">Refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex gap-xs overflow-x-auto pb-sm mb-md custom-scrollbar">
+      <button class="filter-btn badge badge-primary py-xs px-sm cursor-pointer transition-colors active" data-filter="all">All</button>
+      <button class="filter-btn badge bg-surface-container text-on-surface-variant py-xs px-sm cursor-pointer transition-colors" data-filter="crowd">Crowd</button>
+      <button class="filter-btn badge bg-surface-container text-on-surface-variant py-xs px-sm cursor-pointer transition-colors" data-filter="traffic">Traffic</button>
+      <button class="filter-btn badge bg-surface-container text-on-surface-variant py-xs px-sm cursor-pointer transition-colors" data-filter="facility">Facility</button>
+      <button class="filter-btn badge bg-surface-container text-on-surface-variant py-xs px-sm cursor-pointer transition-colors" data-filter="weather">Weather</button>
+      <button class="filter-btn badge bg-surface-container text-on-surface-variant py-xs px-sm cursor-pointer transition-colors" data-filter="alert">Alerts</button>
+    </div>
+
+    <div class="space-y-md" id="feedContainer">
+      <div class="card feed-item p-md" data-category="crowd">
+        <div class="flex items-start gap-md">
+          <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-amber-600">groups</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-xs mb-xs">
+              <span class="font-semibold text-sm">iON Digital Zone, Noida</span>
+              <span class="badge badge-warning text-xs py-0 px-xs">High Crowd</span>
+              <span class="text-xs text-on-surface-variant ml-auto">2 min ago</span>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-sm">Heavy crowd at the main gate. Students advised to enter through Gate 2 for faster entry. Security check queue is 15 minutes.</p>
+            <div class="flex items-center gap-md">
+              <span class="text-xs text-on-surface-variant flex items-center gap-xs">
+                <span class="material-symbols-outlined text-xs">visibility</span> 234 views
+              </span>
+              <span class="text-xs text-on-surface-variant flex items-center gap-xs">
+                <span class="material-symbols-outlined text-xs">thumb_up</span> 45 helpful
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card feed-item p-md" data-category="traffic">
+        <div class="flex items-start gap-md">
+          <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-error">traffic</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-xs mb-xs">
+              <span class="font-semibold text-sm">Sector 62 Traffic Update</span>
+              <span class="badge badge-error text-xs py-0 px-xs">Delayed</span>
+              <span class="text-xs text-on-surface-variant ml-auto">5 min ago</span>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-sm">Heavy traffic on NH-24 due to ongoing construction. Metro is recommended. Estimated delay: 25-30 minutes. Alternative route via DND flyover suggested.</p>
+            <div class="p-sm bg-surface-container rounded-lg mb-sm">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-on-surface-variant">Current travel time:</span>
+                <span class="font-semibold text-error">45 min</span>
+              </div>
+              <div class="flex items-center justify-between text-xs mt-xs">
+                <span class="text-on-surface-variant">Usual travel time:</span>
+                <span class="font-semibold text-primary">15 min</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-md">
+              <span class="text-xs text-on-surface-variant flex items-center gap-xs">
+                <span class="material-symbols-outlined text-xs">route</span> 112 routed
+              </span>
+              <span class="text-xs text-on-surface-variant flex items-center gap-xs">
+                <span class="material-symbols-outlined text-xs">share</span> Share
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card feed-item p-md" data-category="facility">
+        <div class="flex items-start gap-md">
+          <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-green-600">check_circle</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-xs mb-xs">
+              <span class="font-semibold text-sm">Dr. A.P.J. Abdul Kalam Technical University</span>
+              <span class="badge badge-success text-xs py-0 px-xs">Verified</span>
+              <span class="text-xs text-on-surface-variant ml-auto">8 min ago</span>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-sm">AC is working properly in all halls. Water coolers refilled. Clean restrooms available on each floor. Medical desk is operational at Block A entrance.</p>
+            <div class="flex flex-wrap gap-xs">
+              <span class="badge bg-green-100 text-green-800 text-xs">AC Working</span>
+              <span class="badge bg-green-100 text-green-800 text-xs">Water Available</span>
+              <span class="badge bg-green-100 text-green-800 text-xs">Medical Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card feed-item p-md" data-category="alert">
+        <div class="flex items-start gap-md">
+          <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-error">warning</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-xs mb-xs">
+              <span class="font-semibold text-sm">Power Outage Alert</span>
+              <span class="badge badge-error text-xs py-0 px-xs">Urgent</span>
+              <span class="text-xs text-on-surface-variant ml-auto">12 min ago</span>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-sm">Brief power outage reported in Sector 63 area. Generator backup activated. All exam systems running on UPS. Students advised to remain calm.</p>
+            <div class="flex items-center gap-md">
+              <button class="btn btn-outline text-xs py-xs px-sm">
+                <span class="material-symbols-outlined text-xs">phone</span>
+                Contact Center
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card feed-item p-md" data-category="weather">
+        <div class="flex items-start gap-md">
+          <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-blue-600">thunderstorm</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-xs mb-xs">
+              <span class="font-semibold text-sm">Weather Advisory</span>
+              <span class="badge bg-blue-100 text-blue-800 text-xs py-0 px-xs">Monsoon</span>
+              <span class="text-xs text-on-surface-variant ml-auto">15 min ago</span>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-sm">Light rain expected in Noida between 10 AM - 12 PM. Carry an umbrella. Roads near Botanical Garden metro station are waterlogged. Wear rain-appropriate footwear.</p>
+            <div class="p-sm bg-surface-container rounded-lg">
+              <div class="flex items-center justify-between">
+                <div class="text-center">
+                  <span class="material-symbols-outlined text-blue-400">device_thermostat</span>
+                  <p class="text-xs text-on-surface-variant">Temp</p>
+                  <p class="font-semibold text-sm">28°C</p>
+                </div>
+                <div class="text-center">
+                  <span class="material-symbols-outlined text-blue-400">water_drop</span>
+                  <p class="text-xs text-on-surface-variant">Humidity</p>
+                  <p class="font-semibold text-sm">78%</p>
+                </div>
+                <div class="text-center">
+                  <span class="material-symbols-outlined text-blue-400">air</span>
+                  <p class="text-xs text-on-surface-variant">Wind</p>
+                  <p class="font-semibold text-sm">12 km/h</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card feed-item p-md" data-category="crowd">
+        <div class="flex items-start gap-md">
+          <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-green-600">event_available</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-xs mb-xs">
+              <span class="font-semibold text-sm">Lucky Square Mall Parking</span>
+              <span class="badge badge-success text-xs py-0 px-xs">Open</span>
+              <span class="text-xs text-on-surface-variant ml-auto">20 min ago</span>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-sm">Parking facility available with 200+ slots. First 2 hours free for exam students. Security guard present. CCTC monitored. Direct walking path to iON Digital Zone.</p>
+            <div class="flex items-center gap-xs">
+              <span class="material-symbols-outlined text-xs text-green-600">local_parking</span>
+              <span class="text-xs text-on-surface-variant">200+ slots available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card feed-item p-md" data-category="traffic">
+        <div class="flex items-start gap-md">
+          <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-blue-600">train</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-xs mb-xs">
+              <span class="font-semibold text-sm">Metro Service Update</span>
+              <span class="badge bg-blue-100 text-blue-800 text-xs py-0 px-xs">On Time</span>
+              <span class="text-xs text-on-surface-variant ml-auto">25 min ago</span>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-sm">Blue Line metro running normal frequency (every 5 mins). Additional coaches added for morning rush. Sector 62 metro station - Gate 3 is closest to exam center.</p>
+            <div class="flex items-center gap-md">
+              <span class="text-xs text-on-surface-variant flex items-center gap-xs">
+                <span class="material-symbols-outlined text-xs">schedule</span> Next train: 3 min
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card feed-item p-md" data-category="facility">
+        <div class="flex items-start gap-md">
+          <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-amber-600">restaurant</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-xs mb-xs">
+              <span class="font-semibold text-sm">Sagar Ratna Restaurant</span>
+              <span class="badge badge-warning text-xs py-0 px-xs">Busy</span>
+              <span class="text-xs text-on-surface-variant ml-auto">30 min ago</span>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-sm">Restaurant is currently crowded with exam students. Waiting time: 20-25 minutes. South Indian thali combo available for Rs. 180. AC section has seats available.</p>
+            <div class="flex items-center gap-md">
+              <span class="text-xs text-on-surface-variant flex items-center gap-xs">
+                <span class="material-symbols-outlined text-xs">schedule</span> Wait: 20-25 min
+              </span>
+              <span class="text-xs text-on-surface-variant flex items-center gap-xs">
+                <span class="material-symbols-outlined text-xs">star</span> 4.3
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-lg text-center">
+      <button class="btn btn-outline">
+        <span class="material-symbols-outlined text-sm">expand_more</span>
+        Load More Updates
+      </button>
+    </div>
+  </main>
+
+  <nav class="mobile-nav md:hidden">
+    <a href="dashboard.html">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="live-feed.html" class="active">
+      <span class="material-symbols-outlined">live_tv</span>
+      <span>Feed</span>
+    </a>
+    <a href="stay-rest.html">
+      <span class="material-symbols-outlined">hotel</span>
+      <span>Stay</span>
+    </a>
+    <a href="support.html">
+      <span class="material-symbols-outlined">map</span>
+      <span>Navigate</span>
+    </a>
+    <a href="login.html">
+      <span class="material-symbols-outlined">person</span>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const feedItems = document.querySelectorAll('.feed-item');
+
+    themeToggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      sunIcon.classList.toggle('hidden');
+      moonIcon.classList.toggle('hidden');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark');
+      sunIcon.classList.add('hidden');
+      moonIcon.classList.remove('hidden');
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('badge-primary', 'active');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        btn.classList.add('badge-primary', 'active');
+        btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+
+        const filter = btn.dataset.filter;
+        
+        feedItems.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    setInterval(() => {
+      const refreshBtn = document.querySelector('.btn-outline');
+      const icon = refreshBtn.querySelector('.material-symbols-outlined');
+      icon.style.transform = 'rotate(180deg)';
+      setTimeout(() => {
+        icon.style.transform = '';
+      }, 500);
+    }, 30000);
+  </script>
+</body>
+</html>

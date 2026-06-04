@@ -1,1 +1,8 @@
-/*  /index.html  200
+/                   /pages/index.html   200
+/login              /pages/login.html   200
+/register           /pages/register.html   200
+/dashboard          /pages/dashboard.html   200
+/live-feed          /pages/live-feed.html   200
+/stay-rest          /pages/stay-rest.html   200
+/support            /pages/support.html   200
+/*                  /pages/index.html   404

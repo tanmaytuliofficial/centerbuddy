@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | CenterBuddy</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-surface-container-low">
+  <div class="min-h-screen flex">
+    <div class="hidden lg:flex lg:w-1/2 bg-gradient flex-col justify-between p-lg">
+      <div>
+        <a href="index.html" class="flex items-center gap-sm mb-lg">
+          <span class="material-symbols-outlined text-on-primary" style="font-size:32px">school</span>
+          <span class="font-bold text-xl text-on-primary">CenterBuddy</span>
+        </a>
+        <h1 class="text-on-primary text-3xl font-bold mb-md">Join 50,000+<br>Students & Parents</h1>
+        <p class="text-on-primary opacity-80">Get personalized exam day support, live updates, and verified center information.</p>
+      </div>
+      <div class="glass-card p-lg">
+        <h3 class="font-semibold text-primary mb-md">What you'll get:</h3>
+        <ul class="space-y-sm text-sm">
+          <li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary" style="font-size:20px">check_circle</span> Personalized center recommendations</li>
+          <li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary" style="font-size:20px">check_circle</span> Real-time traffic & crowd updates</li>
+          <li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary" style="font-size:20px">check_circle</span> Verified parking & stay options</li>
+          <li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary" style="font-size:20px">check_circle</span> Parent mode for family support</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-md overflow-y-auto">
+      <div class="w-full max-w-md py-lg">
+        <div class="lg:hidden mb-lg text-center">
+          <a href="index.html" class="inline-flex items-center gap-sm mb-md">
+            <span class="material-symbols-outlined text-primary" style="font-size:28px">school</span>
+            <span class="font-bold text-lg text-primary">CenterBuddy</span>
+          </a>
+        </div>
+
+        <div class="text-center mb-lg">
+          <h2 class="text-primary font-bold text-2xl">Create Account</h2>
+          <p class="text-sm text-on-surface-variant mt-sm">Start your exam day journey with us</p>
+        </div>
+
+        <div class="card p-lg">
+          <div class="step-indicator mb-lg">
+            <div class="step active" data-step="1">1</div>
+            <div class="step-line"></div>
+            <div class="step" data-step="2">2</div>
+          </div>
+
+          <form id="registerForm">
+            <div id="step1" class="form-step active">
+              <h3 class="font-semibold text-lg mb-md">Basic Information</h3>
+              
+              <div class="input-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" required>
+              </div>
+
+              <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="your.email@example.com" required>
+              </div>
+
+              <div class="input-group">
+                <label for="phone">Phone Number</label>
+                <div class="flex gap-sm">
+                  <div class="flex items-center gap-xs px-md bg-surface-container rounded border" style="border-color:var(--outline-variant)">
+                    <span class="text-on-surface-variant">+91</span>
+                  </div>
+                  <input type="tel" id="phone" placeholder="10-digit number" maxlength="10" class="flex-1" required>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="password">Create Password</label>
+                <input type="password" id="password" placeholder="Min. 8 characters" minlength="8" required>
+              </div>
+
+              <button type="button" id="nextBtn" class="btn btn-primary w-full">Continue to Exam Details</button>
+            </div>
+
+            <div id="step2" class="form-step">
+              <h3 class="font-semibold text-lg mb-md">Exam Preferences</h3>
+
+              <div class="input-group">
+                <label>Select Exam Category</label>
+                <div class="grid grid-cols-2 gap-sm">
+                  <label class="exam-card border rounded-lg p-md cursor-pointer transition-all hover:border-primary" data-exam="NEET">
+                    <input type="radio" name="exam" value="NEET" class="hidden">
+                    <div class="flex flex-col items-center text-center gap-xs">
+                      <span class="material-symbols-outlined text-primary" style="font-size:32px">monitor_heart</span>
+                      <span class="font-medium text-sm">NEET</span>
+                      <span class="text-xs text-on-surface-variant">Medical Entrance</span>
+                    </div>
+                  </label>
+                  <label class="exam-card border rounded-lg p-md cursor-pointer transition-all hover:border-primary" data-exam="JEE">
+                    <input type="radio" name="exam" value="JEE" class="hidden">
+                    <div class="flex flex-col items-center text-center gap-xs">
+                      <span class="material-symbols-outlined text-secondary" style="font-size:32px">precision_manufacturing</span>
+                      <span class="font-medium text-sm">JEE</span>
+                      <span class="text-xs text-on-surface-variant">Engineering</span>
+                    </div>
+                  </label>
+                  <label class="exam-card border rounded-lg p-md cursor-pointer transition-all hover:border-primary" data-exam="CUET">
+                    <input type="radio" name="exam" value="CUET" class="hidden">
+                    <div class="flex flex-col items-center text-center gap-xs">
+                      <span class="material-symbols-outlined text-primary" style="font-size:32px">school</span>
+                      <span class="font-medium text-sm">CUET</span>
+                      <span class="text-xs text-on-surface-variant">University</span>
+                    </div>
+                  </label>
+                  <label class="exam-card border rounded-lg p-md cursor-pointer transition-all hover:border-primary" data-exam="UPSC">
+                    <input type="radio" name="exam" value="UPSC" class="hidden">
+                    <div class="flex flex-col items-center text-center gap-xs">
+                      <span class="material-symbols-outlined text-secondary" style="font-size:32px">account_balance</span>
+                      <span class="font-medium text-sm">UPSC</span>
+                      <span class="text-xs text-on-surface-variant">Civil Services</span>
+                    </div>
+                  </label>
+                  <label class="exam-card border rounded-lg p-md cursor-pointer transition-all hover:border-primary" data-exam="SSC">
+                    <input type="radio" name="exam" value="SSC" class="hidden">
+                    <div class="flex flex-col items-center text-center gap-xs">
+                      <span class="material-symbols-outlined text-primary" style="font-size:32px">manage_accounts</span>
+                      <span class="font-medium text-sm">SSC</span>
+                      <span class="text-xs text-on-surface-variant">Government</span>
+                    </div>
+                  </label>
+                  <label class="exam-card border rounded-lg p-md cursor-pointer transition-all hover:border-primary" data-exam="OTHER">
+                    <input type="radio" name="exam" value="OTHER" class="hidden">
+                    <div class="flex flex-col items-center text-center gap-xs">
+                      <span class="material-symbols-outlined text-on-surface-variant" style="font-size:32px">more_horiz</span>
+                      <span class="font-medium text-sm">Other</span>
+                      <span class="text-xs text-on-surface-variant">Other Exams</span>
+                    </div>
+                  </label>
+                </div>
+                <p id="examError" class="error-message hidden">Please select an exam category</p>
+              </div>
+
+              <div class="input-group">
+                <label for="examYear">Exam Year</label>
+                <select id="examYear" required>
+                  <option value="">Select Year</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="preferredCity">Preferred City</label>
+                <select id="preferredCity" required>
+                  <option value="">Select City</option>
+                  <option value="Delhi NCR">Delhi NCR</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Kota">Kota</option>
+                  <option value="Bangalore">Bangalore</option>
+                  <option value="Jaipur">Jaipur</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Hyderabad">Hyderabad</option>
+                  <option value="Pune">Pune</option>
+                  <option value="Kolkata">Kolkata</option>
+                  <option value="Lucknow">Lucknow</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Ahmedabad">Ahmedabad</option>
+                </select>
+              </div>
+
+              <div class="flex gap-sm mb-md">
+                <button type="button" id="backBtn" class="btn btn-outline flex-1">Back</button>
+                <button type="submit" class="btn btn-primary flex-1">Create Account</button>
+              </div>
+            </div>
+          </form>
+
+          <div id="successStep" class="form-step">
+            <div class="text-center">
+              <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-md">
+                <span class="material-symbols-outlined text-green-600" style="font-size:48px">check_circle</span>
+              </div>
+              <h3 class="font-semibold text-lg text-green-600">Account Created!</h3>
+              <p class="text-sm text-on-surface-variant mt-sm">Welcome to CenterBuddy. Setting up your dashboard...</p>
+              <div class="mt-md">
+                <div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+                  <div class="h-full bg-green-500 rounded-full animate-pulse" style="width:75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-sm text-on-surface-variant mt-lg">
+          Already have an account? <a href="login.html" class="text-primary font-medium">Login</a>
+        </p>
+
+        <div class="mt-lg text-center text-xs text-on-surface-variant">
+          <p>By continuing, you agree to our <a href="#" class="text-primary">Terms</a> and <a href="#" class="text-primary">Privacy Policy</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const successStep = document.getElementById('successStep');
+    const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
+    const registerForm = document.getElementById('registerForm');
+    const examError = document.getElementById('examError');
+    const examCards = document.querySelectorAll('.exam-card');
+    const steps = document.querySelectorAll('.step');
+
+    let selectedExam = null;
+
+    examCards.forEach(card => {
+      card.addEventListener('click', () => {
+        examCards.forEach(c => {
+          c.classList.remove('border-primary');
+          c.style.background = '';
+        });
+        card.classList.add('border-primary');
+        card.style.background = 'var(--primary-container)';
+        card.querySelector('input').checked = true;
+        selectedExam = card.dataset.exam;
+        examError.classList.add('hidden');
+      });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!fullName || !email || !phone || !password) {
+        return;
+      }
+
+      if (phone.length !== 10 || !/^[6-9]\d{9}$/.test(phone)) {
+        return;
+      }
+
+      if (password.length < 8) {
+        return;
+      }
+
+      step1.classList.remove('active');
+      step2.classList.add('active');
+      steps[0].classList.remove('active');
+      steps[0].classList.add('completed');
+      steps[1].classList.add('active');
+    });
+
+    backBtn.addEventListener('click', () => {
+      step2.classList.remove('active');
+      step1.classList.add('active');
+      steps[1].classList.remove('active');
+      steps[0].classList.add('active');
+      steps[0].classList.remove('completed');
+    });
+
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      if (!selectedExam) {
+        examError.classList.remove('hidden');
+        return;
+      }
+
+      const examYear = document.getElementById('examYear').value;
+      const preferredCity = document.getElementById('preferredCity').value;
+
+      if (!examYear || !preferredCity) {
+        return;
+      }
+
+      step2.classList.remove('active');
+      successStep.classList.add('active');
+      steps[1].classList.remove('active');
+      steps[1].classList.add('completed');
+
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 2500);
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'dark') {
+      html.classList.add('dark');
+    }
+  </script>
+</body>
+</html>
