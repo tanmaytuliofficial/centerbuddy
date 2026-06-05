@@ -1,7 +1,7 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import Navbar from '../../../components/Navbar.astro';
-import { reviews, examCenters } from '../../../data/data';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import { reviews, examCenters } from '../../data/data';
 
 function getCenterName(centerId: string) {
   const center = examCenters.find(c => c.id === centerId);
