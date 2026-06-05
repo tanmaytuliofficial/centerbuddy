@@ -1,18 +1,17 @@
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  output: 'server',
   adapter: cloudflare({
     platformProxy: {
       enabled: true,
     },
   }),
-  integrations: [tailwind()],
   vite: {
     ssr: {
       noExternal: ['maplibre-gl'],
     },
+    plugins: [tailwindcss()],
   },
 });
