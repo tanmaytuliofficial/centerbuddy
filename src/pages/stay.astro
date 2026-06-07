@@ -1,122 +1,150 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/Navbar.astro';
-import Footer from '../../components/Footer.astro';
-import { hotels, examCenters } from '../../data/data';
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { hotels } from '../data/hotels';
 
-const selectedCity = Astro.url.searchParams.get('city') || 'All';
-const cities = ['All', ...new Set(hotels.map(h => h.city))];
-const filteredHotels = selectedCity === 'All' ? hotels : hotels.filter(h => h.city === selectedCity);
+const cities = [...new Set(hotels.map(h => h.city))];
 
-const primaryCenter = examCenters[1];
+const amenitiesIcons: Record<string, string> = {
+  'Free WiFi': 'M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0',
+  'AC Rooms': 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  'Parking': 'M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4',
+  'Restaurant': 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+  'Breakfast': 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z',
+  'WiFi': 'M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0',
+  'Sea View': 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064',
+  'Room Service': 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+  'Gym': 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  'Mess Facility': 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5',
+  'Study Room': 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+  'Hot Water': 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
+  'Housekeeping': 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+  'Power Backup': 'M13 10V3L4 14h7v7l9-11h-7z',
+  'Free Breakfast': 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z',
+  'Business Center': 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+};
+
+const amenityColors: Record<string, string> = {
+  'Free WiFi': 'bg-tertiary-container text-on-tertiary-container',
+  'WiFi': 'bg-tertiary-container text-on-tertiary-container',
+  'AC Rooms': 'bg-primary-container text-on-primary-container',
+  'Parking': 'bg-secondary-container text-on-secondary-container',
+  'Restaurant': 'bg-error-container text-on-error-container',
+  'Breakfast': 'bg-tertiary-container text-on-tertiary-container',
+  'Sea View': 'bg-primary-container text-on-primary-container',
+  'Room Service': 'bg-secondary-container text-on-secondary-container',
+  'Gym': 'bg-tertiary-container text-on-tertiary-container',
+  'Mess Facility': 'bg-secondary-container text-on-secondary-container',
+  'Study Room': 'bg-primary-container text-on-primary-container',
+  'Hot Water': 'bg-error-container text-on-error-container',
+  'Housekeeping': 'bg-primary-container text-on-primary-container',
+  'Power Backup': 'bg-secondary-container text-on-secondary-container',
+  'Free Breakfast': 'bg-tertiary-container text-on-tertiary-container',
+  'Business Center': 'bg-primary-container text-on-primary-container',
+};
 ---
 
 <Layout title="My Stay">
   <Navbar />
 
-  <main class="pt-24 pb-12 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <main class="pt-16 min-h-screen bg-background dark:bg-dark-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="mb-8">
-        <h1 class="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-2">
-          My Stay
-        </h1>
-        <p class="text-gray-600 dark:text-gray-400">Find the perfect accommodation near your exam center</p>
+        <h1 class="text-3xl font-bold text-on-surface dark:text-dark-on-surface">Find Your Perfect Stay</h1>
+        <p class="text-on-surface-variant dark:text-dark-on-surface-variant">Hotels near your exam center</p>
       </div>
 
-      <div class="glass-card p-6 mb-8">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h2 class="font-semibold text-gray-900 dark:text-white mb-1">Your Exam Center</h2>
-            <p class="text-gray-600 dark:text-gray-400">{primaryCenter.name}, {primaryCenter.city}</p>
-          </div>
-          <div class="flex items-center space-x-4">
-            <div class="text-right">
-              <div class="text-sm text-gray-500 dark:text-gray-400">Exam Date</div>
-              <div class="font-semibold text-gray-900 dark:text-white">May 5, 2026</div>
-            </div>
-            <a href={`https://www.google.com/maps/dir/?api=1&destination=${primaryCenter.lat},${primaryCenter.lng}`} target="_blank" class="btn-primary flex items-center space-x-2 text-sm">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-              </svg>
-              <span>Directions</span>
-            </a>
-          </div>
-        </div>
+      <div class="flex flex-wrap gap-3 mb-8">
+        <button
+          class="filter-btn px-4 py-2 rounded-xl bg-primary text-white font-medium transition-all"
+          data-city="all"
+        >
+          All Cities
+        </button>
+        {cities.map((city) => (
+          <button
+            class="filter-btn px-4 py-2 rounded-xl bg-surface-container-high dark:bg-dark-surface-container-high text-on-surface-variant dark:text-dark-on-surface-variant font-medium hover:bg-primary hover:text-white transition-all"
+            data-city={city}
+          >
+            {city}
+          </button>
+        ))}
       </div>
 
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Available Hotels</h2>
-        <select id="city-filter" class="input-field max-w-xs text-sm">
-          {cities.map(city => (
-            <option value={city} selected={selectedCity === city}>{city}</option>
-          ))}
-        </select>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredHotels.map((hotel) => (
-          <div class="glass-card overflow-hidden card-hover group">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="hotelGrid">
+        {hotels.map((hotel) => (
+          <div class="hotel-card" data-city={hotel.city}>
             <div class="relative">
-              <img src={hotel.image} alt={hotel.name} class="w-full h-48 object-cover" loading="lazy" />
-              <div class="absolute top-4 right-4">
-                <span class="px-3 py-1 rounded-full bg-white/90 dark:bg-gray-900/90 text-sm font-bold text-[var(--color-primary)]">
-                  ₹{hotel.price.toLocaleString()}/night
-                </span>
-              </div>
-              <div class="absolute bottom-4 left-4 flex items-center space-x-2">
-                <span class="px-2 py-1 rounded-lg bg-white/90 dark:bg-gray-900/90 text-sm">
-                  <span class="text-yellow-500">★</span> {hotel.rating}
-                </span>
-                <span class="text-white text-sm drop-shadow-lg">{hotel.reviewCount} reviews</span>
+              <img
+                src={hotel.image}
+                alt={hotel.name}
+                class="w-full h-48 object-cover"
+              />
+              <div class="absolute top-4 right-4 glass-card px-3 py-1.5 rounded-xl">
+                <span class="text-secondary font-bold">₹{hotel.price}</span>
+                <span class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant">/night</span>
               </div>
             </div>
 
-            <div class="p-5">
-              <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1">{hotel.name}</h3>
-              <p class="text-gray-500 dark:text-gray-400 text-sm mb-3">{hotel.address}</p>
-
-              <div class="flex items-center space-x-2 mb-4">
-                <svg class="w-4 h-4 text-[var(--color-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                </svg>
-                <span class="text-sm text-gray-600 dark:text-gray-400">{hotel.distance} from center</span>
+            <div class="p-6">
+              <div class="flex items-start justify-between gap-2 mb-3">
+                <div>
+                  <h3 class="text-lg font-semibold text-on-surface dark:text-dark-on-surface">{hotel.name}</h3>
+                  <p class="text-sm text-on-surface-variant dark:text-dark-on-surface-variant">{hotel.city}</p>
+                </div>
+                <div class="flex items-center gap-1 px-2 py-1 rounded-lg bg-secondary-container">
+                  <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <span class="font-semibold text-secondary">{hotel.rating}</span>
+                </div>
               </div>
 
-              <div class="mb-4">
-                <div class="text-xs text-gray-500 dark:text-gray-400 mb-2">Amenities</div>
-                <div class="flex flex-wrap gap-2">
-                  {hotel.amenities.slice(0, 3).map((amenity) => (
-                    <span class="px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-400">
+              <div class="flex items-center gap-4 text-sm text-on-surface-variant dark:text-dark-on-surface-variant mb-4">
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  </svg>
+                  {hotel.distance}
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  {hotel.reviewCount} reviews
+                </span>
+              </div>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                {hotel.amenities.slice(0, 4).map((amenity) => {
+                  const colorClass = amenityColors[amenity] || 'bg-surface-container-high dark:bg-dark-surface-container-high text-on-surface-variant dark:text-dark-on-surface-variant';
+                  return (
+                    <span class={`text-xs px-2.5 py-1 rounded-lg font-medium ${colorClass}`}>
                       {amenity}
                     </span>
-                  ))}
-                  {hotel.amenities.length > 3 && (
-                    <span class="px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-400">
-                      +{hotel.amenities.length - 3} more
-                    </span>
-                  )}
-                </div>
+                  );
+                })}
+                {hotel.amenities.length > 4 && (
+                  <span class="text-xs px-2.5 py-1 rounded-lg font-medium bg-surface-container-high dark:bg-dark-surface-container-high text-on-surface-variant dark:text-dark-on-surface-variant">
+                    +{hotel.amenities.length - 4}
+                  </span>
+                )}
               </div>
 
-              <div class="grid grid-cols-2 gap-3 text-sm mb-4">
-                <div class="p-3 rounded-lg bg-green-50 dark:bg-green-900/20">
-                  <div class="text-xs text-gray-500 dark:text-gray-400">Check-in</div>
-                  <div class="font-semibold text-gray-900 dark:text-white">{hotel.checkInTime}</div>
-                </div>
-                <div class="p-3 rounded-lg bg-red-50 dark:bg-red-900/20">
-                  <div class="text-xs text-gray-500 dark:text-gray-400">Check-out</div>
-                  <div class="font-semibold text-gray-900 dark:text-white">{hotel.checkOutTime}</div>
-                </div>
+              <div class="flex items-center gap-2 text-xs text-on-surface-variant dark:text-dark-on-surface-variant mb-4 p-3 rounded-xl bg-surface-container-low dark:bg-dark-surface-container-low">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Check-in: {hotel.checkInTime} · Check-out: {hotel.checkOutTime}</span>
               </div>
 
-              <div class="flex items-center space-x-2">
-                <button class="flex-1 btn-primary text-sm py-3">Book Now</button>
-                <button class="px-3 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-[var(--color-primary)] transition-colors">
-                  <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                </button>
-              </div>
+              <button class="btn-primary w-full justify-center">
+                Book Now
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
             </div>
           </div>
         ))}
@@ -128,17 +156,29 @@ const primaryCenter = examCenters[1];
 </Layout>
 
 <script>
-  const cityFilter = document.getElementById('city-filter');
-  if (cityFilter) {
-    cityFilter.addEventListener('change', (e) => {
-      const city = (e.target as HTMLSelectElement).value;
-      const url = new URL(window.location.href);
-      if (city === 'All') {
-        url.searchParams.delete('city');
-      } else {
-        url.searchParams.set('city', city);
-      }
-      window.location.href = url.toString();
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const hotelCards = document.querySelectorAll('.hotel-card');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach((b) => {
+        b.classList.remove('bg-primary', 'text-white');
+        b.classList.add('bg-surface-container-high', 'dark:bg-dark-surface-container-high', 'text-on-surface-variant', 'dark:text-dark-on-surface-variant');
+      });
+
+      btn.classList.remove('bg-surface-container-high', 'dark:bg-dark-surface-container-high', 'text-on-surface-variant', 'dark:text-dark-on-surface-variant');
+      btn.classList.add('bg-primary', 'text-white');
+
+      const city = btn.getAttribute('data-city');
+
+      hotelCards.forEach((card) => {
+        const cardCity = card.getAttribute('data-city');
+        if (city === 'all' || cardCity === city) {
+          (card as HTMLElement).style.display = 'block';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
     });
-  }
+  });
 </script>

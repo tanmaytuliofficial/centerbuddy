@@ -1,177 +1,108 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/Navbar.astro';
-import Footer from '../../components/Footer.astro';
-import IndiaMap from '../../components/IndiaMap.astro';
-import { examCenters, reviews, emergencyContacts } from '../../data/data';
-
-const selectedCenterId = Astro.url.searchParams.get('id');
-const selectedCenter = selectedCenterId ? examCenters.find(c => c.id === selectedCenterId) : null;
-const centerReviews = selectedCenterId ? reviews.filter(r => r.centerId === selectedCenterId) : [];
-
-const cities = [...new Set(examCenters.map(c => c.city))];
-const selectedCity = Astro.url.searchParams.get('city');
-const filteredCenters = selectedCity ? examCenters.filter(c => c.city === selectedCity) : examCenters;
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import IndiaMap from '../components/IndiaMap.astro';
+import { examCenters } from '../data/centers';
 ---
 
-<Layout title="Exam Centers">
+<Layout title="My Centers">
   <Navbar />
 
-  <main class="pt-24 pb-12 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-8">
-        <h1 class="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-2">
-          Exam Centers
-        </h1>
-        <p class="text-gray-600 dark:text-gray-400">Find and explore verified exam centers across India</p>
-      </div>
-
-      <div class="grid lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-2">
-          <div class="glass-card overflow-hidden mb-6" style="height: 450px;">
-            <IndiaMap />
-          </div>
-
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-xl font-bold text-gray-900 dark:text-white">All Centers</h2>
-            <select id="city-filter" class="input-field max-w-xs text-sm">
-              <option value="">All Cities</option>
-              {cities.map(city => (
-                <option value={city} selected={selectedCity === city}>{city}</option>
-              ))}
-            </select>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-4">
-            {filteredCenters.map((center) => (
-              <div class="glass-card p-4 card-hover">
-                <div class="flex space-x-4">
-                  <img src={center.image} alt={center.name} class="w-24 h-24 rounded-xl object-cover flex-shrink-0" loading="lazy" />
-                  <div class="flex-1 min-w-0">
-                    <div class="flex items-start justify-between">
-                      <h3 class="font-bold text-gray-900 dark:text-white truncate">{center.name}</h3>
-                      <span class={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                        center.type === 'school' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
-                        center.type === 'college' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' :
-                        'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400'
-                      }`}>
-                        {center.type.replace('_', ' ')}
-                      </span>
-                    </div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{center.city}</p>
-                    <p class="text-xs text-gray-400 dark:text-gray-500 mt-1 truncate">{center.address}</p>
-                    <div class="flex items-center space-x-3 mt-2">
-                      <span class="text-yellow-500 text-sm">★ {center.rating}</span>
-                      <span class="text-gray-300 dark:text-gray-600">|</span>
-                      <span class="text-sm text-gray-500 dark:text-gray-400">{center.reviewCount} reviews</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center space-x-2 mt-4">
-                  <button class="flex-1 btn-primary text-sm py-2" onclick={`window.location.href='/centers?id=${center.id}'`}>
-                    View Details
-                  </button>
-                  <button class="px-3 py-2 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-[var(--color-primary)] transition-colors">
-                    <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            ))}
+  <main class="pt-16 min-h-screen bg-background dark:bg-dark-background">
+    <div class="flex flex-col lg:flex-row h-[calc(100vh-4rem)]">
+      <div class="lg:w-96 bg-surface-container-low dark:bg-dark-surface-container-low border-r border-outline-variant dark:border-dark-outline-variant overflow-y-auto">
+        <div class="p-6 border-b border-outline-variant dark:border-dark-outline-variant sticky top-0 bg-surface-container-low dark:bg-dark-surface-container-low z-10">
+          <h1 class="text-2xl font-bold text-on-surface dark:text-dark-on-surface mb-4">Exam Centers</h1>
+          <div class="relative">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search centers..."
+              class="input-field pl-10"
+            />
+            <svg class="w-5 h-5 text-on-surface-variant absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
           </div>
         </div>
 
-        <div class="space-y-6">
-          {selectedCenter ? (
-            <div class="glass-card p-6 sticky top-24">
-              <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white">Center Details</h2>
-                <button onclick="window.location.href='/centers'" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+        <div class="p-4 space-y-4" id="centerList">
+          {examCenters.map((center) => (
+            <div
+              class="center-card card-hover glass-card rounded-2xl p-4 cursor-pointer"
+              data-center-id={center.id}
+            >
+              <div class="flex gap-4">
+                <img
+                  src={center.image}
+                  alt={center.name}
+                  class="w-24 h-24 rounded-xl object-cover flex-shrink-0"
+                />
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-semibold text-on-surface dark:text-dark-on-surface truncate">{center.name}</h3>
+                  <p class="text-sm text-on-surface-variant dark:text-dark-on-surface-variant">{center.city}</p>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span class="flex items-center gap-1 text-secondary text-sm">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      {center.rating}
+                    </span>
+                    <span class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant">({center.reviewCount})</span>
+                  </div>
+                  <div class="flex items-center gap-2 mt-2">
+                    <span class={`text-xs px-2 py-1 rounded-full ${
+                      center.type === 'school' ? 'bg-tertiary-container text-on-tertiary-container' :
+                      center.type === 'college' ? 'bg-secondary-container text-on-secondary-container' :
+                      'bg-primary-container text-on-primary-container'
+                    }`}>
+                      {center.type.replace('_', ' ')}
+                    </span>
+                  </div>
+                </div>
               </div>
-
-              <img src={selectedCenter.image} alt={selectedCenter.name} class="w-full h-40 rounded-xl object-cover mb-4" />
-
-              <h3 class="font-bold text-gray-900 dark:text-white text-lg">{selectedCenter.name}</h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">{selectedCenter.address}, {selectedCenter.pincode}</p>
-
-              <div class="flex items-center space-x-3 mb-4">
-                <span class="text-yellow-500">★ {selectedCenter.rating}</span>
-                <span class="text-gray-300 dark:text-gray-600">|</span>
-                <span class="text-gray-500 dark:text-gray-400">{selectedCenter.reviewCount} reviews</span>
-              </div>
-
-              <div class="mb-4">
-                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Facilities</h4>
-                <div class="flex flex-wrap gap-2">
-                  {selectedCenter.facilities.map((f) => (
-                    <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm">
-                      {f}
+              <div class="mt-3 pt-3 border-t border-outline-variant dark:border-dark-outline-variant">
+                <p class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant mb-2">{center.address}, {center.pincode}</p>
+                <div class="flex flex-wrap gap-1">
+                  {center.facilities.slice(0, 3).map((facility) => (
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-surface-container-high dark:bg-dark-surface-container-high text-on-surface-variant dark:text-dark-on-surface-variant">
+                      {facility}
                     </span>
                   ))}
+                  {center.facilities.length > 3 && (
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-surface-container-high dark:bg-dark-surface-container-high text-on-surface-variant dark:text-dark-on-surface-variant">
+                      +{center.facilities.length - 3} more
+                    </span>
+                  )}
                 </div>
               </div>
-
-              <div class="space-y-3 mb-6">
-                <a href={`https://www.google.com/maps/dir/?api=1&destination=${selectedCenter.lat},${selectedCenter.lng}`} target="_blank" class="w-full btn-primary flex items-center justify-center space-x-2 text-sm">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                  </svg>
-                  <span>Get Directions</span>
-                </a>
-              </div>
-
-              {centerReviews.length > 0 && (
-                <div>
-                  <h4 class="font-semibold text-gray-900 dark:text-white mb-3">Reviews</h4>
-                  <div class="space-y-3">
-                    {centerReviews.map((review) => (
-                      <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-800/50">
-                        <div class="flex items-center space-x-2 mb-2">
-                          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-tertiary)] flex items-center justify-center text-white text-xs font-bold">
-                            {review.author.charAt(0)}
-                          </div>
-                          <div>
-                            <div class="font-medium text-sm text-gray-900 dark:text-white">{review.author}</div>
-                            <div class="text-xs text-gray-500">{review.date}</div>
-                          </div>
-                        </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">{review.comment}</p>
-                        <div class="flex items-center space-x-1 mt-2">
-                          {[...Array(5)].map((_, i) => (
-                            <span class={`text-sm ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
-          ) : (
-            <div class="glass-card p-6 sticky top-24">
-              <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Emergency Contacts</h2>
-              <div class="space-y-3">
-                {emergencyContacts.map((contact) => (
-                  <div class="p-4 rounded-xl bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 border border-red-200 dark:border-red-800">
-                    <div class="font-semibold text-gray-900 dark:text-white">{contact.name}</div>
-                    <div class="text-[var(--color-primary)] font-bold">{contact.phone}</div>
-                    <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">{contact.available}</div>
-                  </div>
-                ))}
-              </div>
+          ))}
+        </div>
+      </div>
 
-              <div class="mt-6 p-4 rounded-xl bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20">
-                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Need Help?</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Our support team is available 24/7 to assist you.</p>
-                <button class="w-full btn-primary text-sm">Contact Support</button>
-              </div>
+      <div class="flex-1 relative">
+        <div class="absolute inset-0 map-container rounded-none">
+          <IndiaMap centers={examCenters} height="100%" />
+        </div>
+
+        <div class="absolute bottom-6 left-6 glass-card p-4 rounded-2xl shadow-xl z-10">
+          <p class="text-sm text-on-surface-variant dark:text-dark-on-surface-variant mb-2">Click markers to see details</p>
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-primary"></div>
+              <span class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant">College</span>
             </div>
-          )}
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-secondary"></div>
+              <span class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant">School</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-tertiary"></div>
+              <span class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant">Community</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -181,17 +112,29 @@ const filteredCenters = selectedCity ? examCenters.filter(c => c.city === select
 </Layout>
 
 <script>
-  const cityFilter = document.getElementById('city-filter');
-  if (cityFilter) {
-    cityFilter.addEventListener('change', (e) => {
-      const city = (e.target as HTMLSelectElement).value;
-      const url = new URL(window.location.href);
-      if (city) {
-        url.searchParams.set('city', city);
+  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+  const centerList = document.getElementById('centerList');
+  const centerCards = document.querySelectorAll('.center-card');
+
+  searchInput?.addEventListener('input', (e) => {
+    const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+
+    centerCards.forEach((card) => {
+      const centerId = card.getAttribute('data-center-id');
+      const cardContent = card.textContent?.toLowerCase() || '';
+
+      if (cardContent.includes(searchTerm) || searchTerm === '') {
+        (card as HTMLElement).style.display = 'block';
       } else {
-        url.searchParams.delete('city');
+        (card as HTMLElement).style.display = 'none';
       }
-      window.location.href = url.toString();
     });
-  }
+  });
+
+  centerCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      centerCards.forEach((c) => c.classList.remove('ring-2', 'ring-primary'));
+      card.classList.add('ring-2', 'ring-primary');
+    });
+  });
 </script>
